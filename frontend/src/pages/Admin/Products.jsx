@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react"
 import { toast } from 'react-toastify'
-import { useAddProductMutation, useGetProductsQuery, useUpdateProductsMutation, useDeleteProductsMutation } from "../../redux/api/productApiSlice"
+import { useAddProductMutation, useGetProductsQuery, useUpdateProductMutation, useDeleteProductMutation } from "../../redux/api/productApiSlice"
 import { useGetCategoriesQuery } from "../../redux/api/categoryApiSlice"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
-import { FaTrash, FaEdit } from 'react-icons/fa'
+import { FaTrash, FaEdit, FaToggleOff } from 'react-icons/fa'
 
 const Products = () => {
-  // --- Product to be added --- //
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
+  const [categoryName, setCategoryName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [inStock, setInStock] = useState('')
 
-  const [addProduct] = useAddProductMutation()
+  const [editableProductId, setEditableProductId] = useState('')
 
-  // --- Get Products --- //
+  const [addProduct] = useAddProductMutation()
+  const [deleteProduct] = useDeleteProductMutation()
+  const [updateProduct] = useUpdateProductMutation()
   const { data: allProducts, isLoadingProducts, errProducts } = useGetProductsQuery()
+  const { data: allCategories, isLoadingCategories, errCategories } = useGetCategoriesQuery()
 
   if (isLoadingProducts)
     return <div>Loading products...</div>
@@ -25,14 +28,12 @@ const Products = () => {
   if (errProducts)
     return <div>Error fetching products.</div>
 
-  // --- Get Categories --- //
-  const { data: allCategories, isLoadingCategories, errCategories } = useGetCategoriesQuery()
-
   if (isLoadingCategories)
     return <div>Loading categories...</div>
 
   if (errCategories)
     return <div>Error fetching categories.</div>
+
 
   const handleSubmit = async (e) => {
     // Will prevent page reload on form submission or prevent default behaviour upon click of a link or a button within the form
@@ -83,21 +84,44 @@ const Products = () => {
     setImage(downloadURL);
 
     try {
-      const result = await addProduct({ name, image: downloadURL, category, description, price, inStock }).unwrap()
+      if (!editableProductId) {
+        const result = await addProduct({ name, image: downloadURL, category, categoryName, description, price, inStock }).unwrap()
 
-      if (result.error) {
-        toast.error(result.error)
-        return
+        if (result.error) {
+          toast.error(result.error)
+          return
+        }
+
+        toast.success(`${name} has been added successfully.`)
+
+        setName('')
+        setImage('')
+        setDescription('')
+        setPrice('')
+        setCategory('')
+        setCategoryName('')
+        setInStock('')
       }
 
-      toast.success(`${name} has been added successfully.`)
+      else {
+        const result = await updateProduct({ _id: editableProductId, name, image: downloadURL, category, categoryName, description, price, inStock }).unwrap()
 
-      setName('')
-      setImage('')
-      setDescription('')
-      setPrice('')
-      setCategory('')
-      setInStock('')
+        if (result.error) {
+          toast.error(result.error)
+          return
+        }
+
+        toast.success(`${name} has been updated successfully.`)
+
+        setEditableProductId('')
+        setName('')
+        setImage('')
+        setDescription('')
+        setPrice('')
+        setCategory('')
+        setCategoryName('')
+        setInStock('')
+      }
     }
 
     catch (error) {
@@ -106,12 +130,49 @@ const Products = () => {
     }
   }
 
-  const handleDelete = async (e)=>{
+  const handleDelete = async (p) => {
+    if (window.confirm("Are you sure that you want to delete this product?")) {
+      try {
+        await deleteProduct(p._id)
+        toast.success(`${p.name} deleted successfully.`)
+      }
 
+      catch (err) {
+        console.error(err)
+        toast.error("Error deleting product.")
+      }
+    }
   }
 
-  const handleEdit = async (e)=>{
+  const handleEdit = async (p) => {
+    setEditableProductId(p._id)
+    setName(p.name)
+    setImage(p.image)
+    setDescription(p.description)
+    setPrice(p.price)
+    setCategory(p.category)
+    setInStock(p.inStock)
+  }
 
+  const handleCategoryChange = async (e) => {
+    const selectedCategoryId = e.target.value;
+    const selectedCategory = allCategories.find(c => c._id === selectedCategoryId);
+
+    if (selectedCategory) {
+      setCategory(selectedCategoryId);
+      setCategoryName(selectedCategory.name); // Set category name based on selection
+    }
+  }
+
+  const handleExitEdit = () => {
+    setEditableProductId('')
+    setName('')
+    setImage('')
+    setDescription('')
+    setPrice('')
+    setCategory('')
+    setCategoryName('')
+    setInStock('')
   }
 
   return (
@@ -123,11 +184,10 @@ const Products = () => {
           <input className="w-[10rem]" type="text" onChange={e => setDescription(e.target.value)} value={description} placeholder="Description" />
           <input className="w-[10rem]" type="number" onChange={e => setPrice(e.target.value)} value={price} placeholder="Price" />
           <input className="w-[10rem]" type="number" onChange={e => setInStock(e.target.value)} value={inStock} placeholder="In Stock" />
-          {/* <input className="w-[10rem]" type="text" onChange={e => setCategory(e.target.value)} value={category} placeholder="Category" /> */}
 
           {/* Name attribute for select is neccessary otherwise no data will be submitted */}
           {/* Id attribute associates it with a label */}
-          <select name="catgories" id="categories" required={true} onChange={e => setCategory(e.target.value)} >
+          <select name="catgories" id="categories" required={true} onChange={handleCategoryChange} >
             <option>Select</option>
 
             {allCategories && allCategories.map(c => (
@@ -140,17 +200,27 @@ const Products = () => {
 
         <div className="flex flex-col gap-3 mt-[4rem]">
           {allProducts && (allProducts.length === 0 ? <div>No products have been added yet.</div> : (
-            allProducts.map(p => (
-              <div className="flex flex-row gap-3 items-center align-middle">
-                <img src={p.image} alt="image.png" className="h-10 w-10" />
-                <div>{p.name}</div>
-                <div>{p.description}</div>
-                <div>Rs.{p.price}</div>
-                <div>{p.inStock}</div>
-                <div>{p.category}</div>
+            allProducts.map((p, index) => (
+              <div key={p._id} className="flex flex-row gap-3 items-center align-middle">
 
-                <FaTrash onClick={handleDelete} className="cursor-pointer text-red-700" />
-                <FaEdit onClick={handleEdit} className="cursor-pointer text-cyan-800" />
+                {editableProductId !== p._id && (
+                  <>
+                    <img src={p.image} alt="image.png" className="h-10 w-10" />
+                    <div>{p.name}</div>
+                    <div>{p.description}</div>
+                    <div>Rs.{p.price}</div>
+                    <div>{p.inStock}</div>
+                    <div>{p.categoryName}</div>
+                  </>
+                )}
+
+                {editableProductId === p._id && (
+                  <div>Updating {p.name}...</div>
+                )}
+
+                {editableProductId !== p._id && <FaEdit onClick={() => handleEdit(p)} className="cursor-pointer text-cyan-800" />}
+                {editableProductId === p._id && <FaToggleOff onClick={handleExitEdit} className="cursor-pointer text-red-700" />}
+                {!editableProductId && <FaTrash onClick={() => handleDelete(p)} className="cursor-pointer text-red-700" />}
               </div>
             ))
           ))}

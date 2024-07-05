@@ -44,6 +44,10 @@ const productSchema = new mongoose.Schema({
         ref: "Category"
     },
 
+    categoryName: {
+        type: String
+    },
+
     reviews: [reviewSchema],
 
     rating: {

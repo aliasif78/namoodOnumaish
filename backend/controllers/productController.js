@@ -4,7 +4,7 @@ import { Error } from "mongoose";
 import mongoose from "mongoose";
 
 const addProduct = asyncHandler(async (req, res) => {
-    const { name, image, category, description, price, inStock } = req.body
+    const { name, image, category, categoryName, description, price, inStock } = req.body
 
     try {
         // Check if the Product already exists
@@ -15,7 +15,7 @@ const addProduct = asyncHandler(async (req, res) => {
             return
         }
 
-        const result = new Product({ name, image, category, description, price, inStock })
+        const result = new Product({ name, image, category, categoryName, description, price, inStock })
         await result.save()
         res.json(result)
     }
@@ -72,7 +72,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         if (!product)
             return res.status(404).json({error: "Product not found."})
 
-        const {name, image, description, price, inStock, category} = req.body
+        const {name, image, description, price, inStock, category, categoryName} = req.body
 
         product.name = name
         product.image = image
@@ -80,6 +80,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.price = price
         product.inStock = inStock
         product.category = category
+        product.categoryName = categoryName
 
         const updatedProduct = await product.save()
         return res.json(updatedProduct)

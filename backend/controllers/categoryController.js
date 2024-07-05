@@ -87,4 +87,24 @@ const deleteCategory = asyncHandler(async (req, res) => {
     }
 })
 
-export { addCategory, getCategories, updateCategory, deleteCategory }
+const getCategoryById = asyncHandler(async (req, res) => {
+    const id = req.params.id
+
+    try {
+        const category = Category.findById({ _id: id })
+        
+        if (!category)
+            return res.status(404).json({error: "Category does not exist."})
+
+        return res.json(category)
+    } 
+    
+    catch (err) {
+        console.error(err)
+        return res.status(500).json({error: "Internal server error."})
+    }
+
+
+})
+
+export { addCategory, getCategories, updateCategory, deleteCategory, getCategoryById }
