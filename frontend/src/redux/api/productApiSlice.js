@@ -32,7 +32,25 @@ export const productApiSlice = apiSlice.injectEndpoints({
                 method: 'DELETE'
             })
         }),
+
+        getProductDetails: builder.query({
+            query: (id) => ({
+                url: `${PRODUCTS_URL}/${id}`,
+                method: 'GET',
+                providesTags: (result, error, productId) => [
+                    { type: "Product", id: productId }
+                ]
+            })
+        }),
+
+        addReview: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/reviews/${data.id}`,
+                method: 'PUT',
+                body: data.review
+            })
+        }),
     })
 })
 
-export const { useAddProductMutation, useGetProductsQuery, useUpdateProductMutation, useDeleteProductMutation } = productApiSlice
+export const { useAddProductMutation, useGetProductsQuery, useUpdateProductMutation, useDeleteProductMutation, useAddReviewMutation, useGetProductDetailsQuery } = productApiSlice

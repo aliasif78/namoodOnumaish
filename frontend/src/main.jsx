@@ -11,10 +11,11 @@ import { createBrowserRouter } from 'react-router-dom'
 import Register from './pages/Auth/Register.jsx'
 import Login from './pages/Auth/Login.jsx'
 import Home from './pages/Home.jsx'
-import Profile from './pages/User/Profile.jsx'
+import Profile from './pages/Users/Profile.jsx'
 import Users from './pages/Admin/Users.jsx'
 import Categories from './pages/Admin/Categories.jsx'
 import Products from './pages/Admin/Products.jsx'
+import ProductDetails from './pages/Products/ProductDetails.jsx'
 
 // Components
 import PrivateRoute from './components/PrivateRoute.jsx'
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path='/register' element={<Register />}></Route>
       <Route path='/login' element={<Login />}></Route>
       <Route index={true} path='/' element={<Home />} ></Route>
+      <Route path='/product/:id' element={<ProductDetails />}></Route>
 
       {/* Private Routes */}
       <Route path='' element={<PrivateRoute />}>

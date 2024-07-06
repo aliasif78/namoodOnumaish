@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema
 
 const reviewSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-
     rating: {
         type: Number,
         required: true
@@ -14,7 +9,8 @@ const reviewSchema = new mongoose.Schema({
 
     comment: {
         type: String,
-        required: true
+        required: false,
+        default: ""
     },
 
     user: {
@@ -93,6 +89,12 @@ const productSchema = new mongoose.Schema({
     },
 
     discountAmount: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+
+    unitsSold: {
         type: Number,
         required: false,
         default: 0

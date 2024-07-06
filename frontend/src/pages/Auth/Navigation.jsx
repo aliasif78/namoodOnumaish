@@ -42,10 +42,6 @@ export const Navigation = () => {
                 </div>
 
                 <div className='flex w-fit gap-5'>
-                    <Link to='/favourites'>
-                        <IoIosHeartEmpty className='h-6 w-6 cursor-pointer hover:text-cyan-300' />
-                    </Link>
-
                     <Link to='/cart'>
                         <AiOutlineShoppingCart className='h-6 w-6 cursor-pointer hover:text-cyan-300' />
                     </Link>

@@ -4,6 +4,7 @@ import { useAddProductMutation, useGetProductsQuery, useUpdateProductMutation, u
 import { useGetCategoriesQuery } from "../../redux/api/categoryApiSlice"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import { FaTrash, FaEdit, FaToggleOff } from 'react-icons/fa'
+import { Link } from "react-router-dom"
 
 const Products = () => {
   const [name, setName] = useState('')
@@ -19,8 +20,8 @@ const Products = () => {
   const [addProduct] = useAddProductMutation()
   const [deleteProduct] = useDeleteProductMutation()
   const [updateProduct] = useUpdateProductMutation()
-  const { data: allProducts, isLoadingProducts, errProducts } = useGetProductsQuery()
-  const { data: allCategories, isLoadingCategories, errCategories } = useGetCategoriesQuery()
+  const { data: allProducts, isLoading: isLoadingProducts, isError: errProducts } = useGetProductsQuery()
+  const { data: allCategories, isLoading: isLoadingCategories, isError: errCategories } = useGetCategoriesQuery()
 
   if (isLoadingProducts)
     return <div>Loading products...</div>
@@ -206,7 +207,7 @@ const Products = () => {
                 {editableProductId !== p._id && (
                   <>
                     <img src={p.image} alt="image.png" className="h-10 w-10" />
-                    <div>{p.name}</div>
+                    <Link to={`/product/${p._id}`} className="hover:text-cyan-600 hover:underline">{p.name}</Link>
                     <div>{p.description}</div>
                     <div>Rs.{p.price}</div>
                     <div>{p.inStock}</div>
