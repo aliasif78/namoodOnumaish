@@ -16,6 +16,10 @@ import Users from './pages/Admin/Users.jsx'
 import Categories from './pages/Admin/Categories.jsx'
 import Products from './pages/Admin/Products.jsx'
 import ProductDetails from './pages/Products/ProductDetails.jsx'
+import Cart from './pages/Cart.jsx'
+import Checkout from './pages/Order/Checkout.jsx'
+import Orders from './pages/Admin/Orders.jsx'
+import OrderDetails from './pages/Order/OrderDetails.jsx'
 
 // Components
 import PrivateRoute from './components/PrivateRoute.jsx'
@@ -28,6 +32,8 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login />}></Route>
       <Route index={true} path='/' element={<Home />} ></Route>
       <Route path='/product/:id' element={<ProductDetails />}></Route>
+      <Route path='/cart' element={<Cart />}></Route>
+      <Route path='/checkout' element={<Checkout />}></Route>
 
       {/* Private Routes */}
       <Route path='' element={<PrivateRoute />}>
@@ -39,6 +45,8 @@ const router = createBrowserRouter(
         <Route path='/admin/users' element={<Users />}></Route>
         <Route path='/admin/categories' element={<Categories />}></Route>
         <Route path='/admin/products' element={<Products />}></Route>
+        <Route path='/admin/orders' element={<Orders />}></Route>
+        <Route path='/admin/orders/:id' element={<OrderDetails />}></Route>
       </Route>
     </Route>
   ))

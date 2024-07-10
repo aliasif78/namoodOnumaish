@@ -71,7 +71,10 @@ const Products = () => {
     }
 
     // Get Firebase download URL for the image
-    toast.info("Adding product, please wait...")
+    if (!editableProductId)
+      toast.info("Adding product, please wait...")
+    else
+      toast.info("Updating product, please wait...")
 
     const storage = getStorage();
     const storageRef = ref(storage, image)
@@ -212,6 +215,7 @@ const Products = () => {
                     <div>Rs.{p.price}</div>
                     <div>{p.inStock}</div>
                     <div>{p.categoryName}</div>
+                    <div>{p.discountPercent}%</div>
                   </>
                 )}
 

@@ -3,14 +3,18 @@ import { AiOutlineStar, AiFillStar, } from "react-icons/ai"
 import { toast } from 'react-toastify'
 import { useAddReviewMutation, useGetProductDetailsQuery } from "../../redux/api/productApiSlice"
 import { useParams } from "react-router"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { addToCart } from "../../redux/features/cart/cartSlice"
 
 const ProductDetails = () => {
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
+  const [quantity, setQuantity] = useState(1)
 
   const [addReview] = useAddReviewMutation()
   const { userInfo } = useSelector(state => state.auth)
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
   const { id } = useParams()
   const { data: product, isLoading: isLoadingProduct, isError: errProduct } = useGetProductDetailsQuery(id)
@@ -23,7 +27,7 @@ const ProductDetails = () => {
 
   const handleSubmit = async () => {
     // Ensure product and user data are loaded
-    if (!product || isLoadingProduct || isLoadingUser) {
+    if (!product || isLoadingProduct) {
       toast.error("Data is still loading. Please wait.")
       return
     }
@@ -58,13 +62,30 @@ const ProductDetails = () => {
     }
   }
 
-  const handleBuyNow = ()=>{
-    toast.success("bought")
+  const handleAddToCart = () => {
+    const alreadyInCart = cart.cartItems.find(i => i._id === product._id)
+
+    if (alreadyInCart){
+      toast.warning("Product is already in your cart.")
+      return
+    }
+
+    try {
+      dispatch(addToCart({ ...product, quantity }))
+
+      toast.success("Product has been added to your cart.")
+      toast.info("Navigate to the cart to checkout.")
+    }
+
+    catch (err) {
+      toast.error("An error occured while adding the product to your cart.")
+      console.error(err)
+    }
   }
-  
-  const handleAddToCart = ()=>{
-    toast.success("Product has been added to your cart.")
-    toast.info("Navigate to the cart to checkout.")
+
+  const handleDecrement = () => {
+    if (quantity >= 1)
+      setQuantity(quantity - 1)
   }
 
   return (
@@ -150,20 +171,25 @@ const ProductDetails = () => {
 
         <div>
           {product.numReviews === 0 ? <div>No reviews have been submitted for this product.</div> : (
-            (product.reviews.map((r) => (
-              <div className="flex flex-row justify-center align-middle items-center gap-2">
-                <div key={1}>{r.rating}</div>
-                <div key={2}>{r.comment === "" ? "No comment" : r.comment}</div>
+            (product.reviews.map((r, index) => (
+              <div key={index} className="flex flex-row justify-center align-middle items-center gap-2">
+                <div>{r.rating}</div>
+                <div>{r.comment === "" ? "No comment" : r.comment}</div>
               </div>
             )))
           )}
         </div>
 
         <div className="flex flex-row justify-center align-middle items-center gap-3">
-          <button onClick={handleBuyNow} className="bg-blue-900 hover:bg-blue-950 text-white rounded-md px-4 py-2">Buy Now</button>
+          <button onClick={handleDecrement} className="bg-black text-white rounded-md px-2">-</button>
+          <div>{quantity}</div>
+          <button onClick={() => setQuantity(quantity + 1)} className="bg-black text-white rounded-md px-2">+</button>
+        </div>
+
+        <div className="flex flex-row justify-center align-middle items-center gap-3">
           <button onClick={handleAddToCart} className="bg-blue-900 hover:bg-blue-950 text-white rounded-md px-4 py-2">Add to Cart</button>
         </div>
-      </div>
+      </div >
     </>
   )
 }
