@@ -101,9 +101,9 @@ const Checkout = () => {
 
                 <select name="paymentMethod" id="paymentMethod" value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)}>
                     <option value="">Select</option>
-                    <option value="EasyPaisa">EasyPaisa</option>
-                    <option value="Bank Transfer">Bank Transfer</option>
-                    <option value="Cash on Delivery">Cash on Delivery</option>
+                    <option value="EP">EasyPaisa</option>
+                    <option value="BT">Bank Transfer</option>
+                    <option value="COD">Cash on Delivery</option>
                 </select>
 
                 <button type="submit" className="bg-black text-white px-2 py-1 rounded-xl">Place Order</button>

@@ -2,17 +2,28 @@ import React, { useEffect } from 'react'
 import { useAddCategoryMutation, useGetCategoriesQuery, useUpdateCategoryMutation, useDeleteCategoryMutation } from '../../redux/api/categoryApiSlice'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { FaEdit, FaTrash, FaSave } from 'react-icons/fa'
+import { RiSortAlphabetAsc, RiSortAlphabetDesc } from "react-icons/ri";
 
 const Categories = () => {
   const [addCategory] = useAddCategoryMutation()
   const [updateCategory] = useUpdateCategoryMutation()
   const [deleteCategory] = useDeleteCategoryMutation()
-  const { data: categories } = useGetCategoriesQuery()
+  const { data: categories, isLoading, isError } = useGetCategoriesQuery()
 
   const [name, setName] = useState('')
   const [editableName, setEditableName] = useState('')
   const [editableCategoryId, setEditableCategoryId] = useState('')
+  const [editableCategory, setEditableCategory] = useState('')
+
+  const [isAddOrUpdate, setIsAddOrUpdate] = useState(false)
+  const [categoriesCopy, setCategoriesCopy] = useState([])
+  const [isSorted, setIsSorted] = useState(false)
+
+  if (isLoading)
+    return <div>Loading categories...</div>
+
+  if (isError)
+      return <div>Error loading categories.</div>
 
   const handleAddCategory = async (e) => {
     // Has no effect as form is not being used here
@@ -43,7 +54,9 @@ const Categories = () => {
 
   const handleEdit = (category) => {
     setEditableCategoryId(category._id)
-    setEditableName(category.name)
+    setEditableCategory(category)
+    setName(category.name)
+    setIsAddOrUpdate(true)
   }
 
   const handleDelete = async (category) => {
@@ -60,11 +73,11 @@ const Categories = () => {
     }
   }
 
-  const handleSave = async (e, category) => {
+  const handleSave = async (e) => {
     e.preventDefault()
 
     try {
-      const updatedCategory = { ...category, name: editableName }
+      const updatedCategory = { ...editableCategory, name }
       const result = await updateCategory(updatedCategory).unwrap()
 
       if (result.error) {
@@ -74,8 +87,10 @@ const Categories = () => {
 
       setEditableName('')
       setEditableCategoryId('')
+      setEditableCategory('')
 
       toast.success('Category has been successfully updated.')
+      handleExitEdit()
     }
 
     catch (error) {
@@ -84,34 +99,121 @@ const Categories = () => {
     }
   }
 
+  const handleExitEdit = () => {
+    setIsAddOrUpdate(false)
+    setEditableCategoryId('x')
+    setName('')
+  }
+
+  const sortAZ = () => {
+    toast.info("Sorted in alphabetical Order.")
+
+    setIsSorted(true)
+    // Create a new copy of allProducts
+    const sortedCategories = [...categories].sort((a, b) => {
+      return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    });
+
+    // Update state with the sorted products
+    setCategoriesCopy(sortedCategories);
+  };
+
+  const sortZA = () => {
+    toast.info("Sorted in reverse alphabetical Order.")
+
+    setIsSorted(true)
+    // Create a new copy of allProducts
+    const sortedCategories = [...categories].sort((a, b) => {
+      return b.name.localeCompare(a.name, 'en', { sensitivity: 'base' });
+    });
+
+    // Update state with the sorted products
+    setCategoriesCopy(sortedCategories);
+  };
+
   return (
     <>
-      <div className='flex flex-col gap-5 mt-[3rem] justify-center items-center'>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} className='w-[20rem] pl-3' />
-        <button onClick={(e) => handleAddCategory(e)} onChange={e => setName(e.target.value)} className='bg-neutral-700 hover:bg-black rounded-md text-white px-4 py-2' >Add Category</button>
+      <div className="flex items-center justify-center h-screen cursor-default">
+        <div className="bg-white flex flex-col w-[90%] h-[75%] -mt-[5rem] shadow-xl px-[2rem]">
 
-        <div className="flex flex-col gap-1">
-          {categories && categories.map((category, i) => (
-            <div key={category._id} className='flex flex-row gap-2 justify-left items-center'>
-              <div>{i}.</div>
+          <div className="flex flex-row h-[20%] items-center justify-between">
+            <span className="font-semibold text-neutral-700 text-2xl ml-[1rem]">Categories</span>
 
-              {editableCategoryId !== category._id ? (
-                <>
-                  <div>{category.name}</div>
-                  <FaEdit className='cursor-pointer text-cyan-700 ml-[0.5rem]' onClick={() => handleEdit(category)}></FaEdit>
-                </>
-              ) : (
-                <>
-                  <input type="text" value={editableName} onChange={e => setEditableName(e.target.value)} />
-                  <FaSave className='cursor-pointer text-cyan-700 ml-[0.5rem]' onClick={(e) => handleSave(e, category)}></FaSave>
-                </>
-              )}
+            <div className="flex flex-row items-end gap-5">
+              <div className="flex flex-row gap-2">
+                <RiSortAlphabetAsc onClick={sortAZ} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                <RiSortAlphabetDesc onClick={sortZA} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+              </div>
 
-              <FaTrash className='cursor-pointer text-cyan-700' onClick={() => handleDelete(category)}></FaTrash>
+              <button onClick={() => setIsAddOrUpdate(!isAddOrUpdate)} className="bg-blue-700 hover:bg-blue-900 text-white text-2xl px-2 pb-1">+</button>
             </div>
-          ))}
+          </div>
+
+          <table className="w-full flex flex-col justify-between border-[2px] h-[70%] overflow-y-auto">
+            <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
+              <th className="font-semibold w-[10%]">Index</th>
+              <th className="font-semibold w-[40%]">ID</th>
+              <th className="font-semibold w-[40%]">Name</th>
+              <th className="font-semibold w-[10%]">Actions</th>
+            </thead>
+
+            {(!isSorted ? categories : categoriesCopy).map((c, index) => (
+              <tr key={c._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-center align-middle">
+                <td className="w-[10%] flex flex-row justify-center">{index + 1}</td>
+                <td className="w-[40%] flex flex-row justify-center px-4">{c._id}</td>
+                <td className="w-[40%] flex flex-row justify-center px-4">{c.name}</td>
+
+                <td className="w-[10%] flex flex-row gap-2 justify-center px-4">
+                  <lord-icon
+                    class="cursor-pointer"
+                    onClick={() => handleEdit(c)}
+                    src="https://cdn.lordicon.com/oqaajvyl.json"
+                    trigger="hover"
+                    state="hover-line"
+                    stroke="bold"
+                    colors="primary:#000000,secondary:#1d4ed8"
+                    style={{ width: "25px", height: "25px" }}>
+                  </lord-icon>
+
+                  <lord-icon
+                    class="cursor-pointer"
+                    onClick={() => handleDelete(c)}
+                    src="https://cdn.lordicon.com/skkahier.json"
+                    trigger="hover"
+                    stroke="bold"
+                    colors="primary:#c71f16"
+                    style={{ width: "25px", height: "25px" }}>
+                  </lord-icon>
+                </td>
+              </tr>
+            ))}
+          </table>
         </div>
-      </div>
+
+        {isAddOrUpdate && (
+          <>
+            <div className="overlay flex w-full h-full -mt-[2rem] absolute bg-black opacity-70">
+            </div>
+
+            <div className="overlay flex flex-col gap-4 w-[25%] h-[35%] -mt-[5rem] absolute bg-white opacity-[100%]">
+              <div className="flex flex-col items-end mb-[1rem]">
+                <button className="bg-red-700 hover:bg-red-900 text-white px-2 pb-1" onClick={handleExitEdit}>x</button>
+              </div>
+
+              <span className="justify-center text-center font-semibold text-neutral-700 text-2xl -mt-[1.5rem]">{editableCategoryId ? "Update Category" : "Add Category"}</span>
+
+              <div className="flex flex-row justify-center w-full px-5 gap-3">
+                <input type="text" className="bg-white w-[15rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+              </div>
+
+              <div className="flex flex-row justify-center">
+                <button onClick={editableCategoryId !== 'x' ? handleSave : handleAddCategory} className="px-4 py-2 bg-blue-900 hover:bg-blue-700 text-white w-fit rounded-xl">Submit</button>
+              </div>
+            </div>
+          </>
+        )}
+
+      </div >
     </>
   )
 }

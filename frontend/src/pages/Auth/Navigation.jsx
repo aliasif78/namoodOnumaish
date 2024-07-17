@@ -36,8 +36,8 @@ export const Navigation = () => {
                         <span className='cursor-pointer hover:text-cyan-300'>Shop</span>
                     </Link>
 
-                    <Link to='/aboutus'>
-                        <span className='cursor-pointer hover:text-cyan-300'>About Us</span>
+                    <Link to='/contactus'>
+                        <span className='cursor-pointer hover:text-cyan-300'>Contact Us</span>
                     </Link>
                 </div>
 

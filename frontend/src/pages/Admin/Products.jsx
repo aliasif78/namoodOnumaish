@@ -3,25 +3,36 @@ import { toast } from 'react-toastify'
 import { useAddProductMutation, useGetProductsQuery, useUpdateProductMutation, useDeleteProductMutation } from "../../redux/api/productApiSlice"
 import { useGetCategoriesQuery } from "../../redux/api/categoryApiSlice"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
-import { FaTrash, FaEdit, FaToggleOff } from 'react-icons/fa'
-import { Link } from "react-router-dom"
+import { Link } from 'react-router-dom'
+import "./Products.css"
+
+import { RiSortAlphabetAsc, RiSortAlphabetDesc, RiCoinFill } from "react-icons/ri";
+import { PiShootingStarFill } from 'react-icons/pi'
+import { GiFallingStar } from "react-icons/gi";
+import { TbSquareRoundedArrowDown } from "react-icons/tb";
+import { FaCoins } from "react-icons/fa";
+import { MdAutoGraph } from "react-icons/md";
 
 const Products = () => {
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState('x')
   const [categoryName, setCategoryName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [inStock, setInStock] = useState('')
 
   const [editableProductId, setEditableProductId] = useState('')
+  const [isAddOrUpdate, setIsAddOrUpdate] = useState(false)
 
   const [addProduct] = useAddProductMutation()
   const [deleteProduct] = useDeleteProductMutation()
   const [updateProduct] = useUpdateProductMutation()
   const { data: allProducts, isLoading: isLoadingProducts, isError: errProducts } = useGetProductsQuery()
   const { data: allCategories, isLoading: isLoadingCategories, isError: errCategories } = useGetCategoriesQuery()
+
+  const [productsCopy, setProductsCopy] = useState([])
+  const [isSorted, setIsSorted] = useState(false)
 
   if (isLoadingProducts)
     return <div>Loading products...</div>
@@ -34,7 +45,6 @@ const Products = () => {
 
   if (errCategories)
     return <div>Error fetching categories.</div>
-
 
   const handleSubmit = async (e) => {
     // Will prevent page reload on form submission or prevent default behaviour upon click of a link or a button within the form
@@ -50,7 +60,7 @@ const Products = () => {
       return
     }
 
-    if (!category || category === "Select") {
+    if (!category || category === "Category") {
       toast.error("Please provide a category for the product.")
       return
     }
@@ -70,12 +80,12 @@ const Products = () => {
       return
     }
 
-    // Get Firebase download URL for the image
     if (!editableProductId)
       toast.info("Adding product, please wait...")
     else
-      toast.info("Updating product, please wait...")
-
+    toast.info("Updating product, please wait...")
+  
+  // Get Firebase download URL for the image
     const storage = getStorage();
     const storageRef = ref(storage, image)
 
@@ -149,12 +159,14 @@ const Products = () => {
   }
 
   const handleEdit = async (p) => {
+    setIsAddOrUpdate(true)
     setEditableProductId(p._id)
     setName(p.name)
     setImage(p.image)
     setDescription(p.description)
     setPrice(p.price)
-    setCategory(p.category)
+    setCategory('x')
+    setCategoryName('x')
     setInStock(p.inStock)
   }
 
@@ -169,6 +181,7 @@ const Products = () => {
   }
 
   const handleExitEdit = () => {
+    setIsAddOrUpdate(false)
     setEditableProductId('')
     setName('')
     setImage('')
@@ -179,59 +192,243 @@ const Products = () => {
     setInStock('')
   }
 
+  const sortAZ = () => {
+    toast.info("Sorted in alphabetical Order.")
+
+    setIsSorted(true)
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return a.name.localeCompare(b.name, 'en', { sensitivity: 'base' });
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortZA = () => {
+    toast.info("Sorted in reverse alphabetical order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return b.name.localeCompare(a.name, 'en', { sensitivity: 'base' });
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortPriceLH = () => {
+    toast.info("Sorted by price in ascending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return a.price - b.price
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortPriceHL = () => {
+    toast.info("Sorted by price in descending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return b.price - a.price
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortRatingLH = () => {
+    toast.info("Sort by rating in ascending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return a.rating - b.rating
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortRatingHL = () => {
+    toast.info("Sorted by rating in descending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return b.rating - a.rating
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortStockLH = () => {
+    toast.info("Sorted by available stock in ascending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return a.inStock - b.inStock
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
+  const sortSoldHL = () => {
+    toast.info("Sorted by units sold in descending order.")
+    setIsSorted(true)
+
+    // Create a new copy of allProducts
+    const sortedProducts = [...allProducts].sort((a, b) => {
+      return b.unitsSold - a.unitsSold
+    });
+
+    // Update state with the sorted products
+    setProductsCopy(sortedProducts);
+  };
+
   return (
     <>
-      <div className="w-full h-full flex flex-row justify-between px-[5rem]">
-        <form action="submit" className='flex flex-col mt-[5rem] items-center gap-5' onSubmit={handleSubmit}>
-          <input className="w-[10rem]" type="text" onChange={e => setName(e.target.value)} value={name} placeholder="Name" />
-          <input className="w-[10rem]" type="text" onChange={e => setImage(e.target.value)} value={image} placeholder="Image URL" />
-          <input className="w-[10rem]" type="text" onChange={e => setDescription(e.target.value)} value={description} placeholder="Description" />
-          <input className="w-[10rem]" type="number" onChange={e => setPrice(e.target.value)} value={price} placeholder="Price" />
-          <input className="w-[10rem]" type="number" onChange={e => setInStock(e.target.value)} value={inStock} placeholder="In Stock" />
+      <div className="flex items-center justify-center h-screen cursor-default">
+        <div className="bg-white flex flex-col w-[90%] h-[75%] -mt-[5rem] shadow-xl px-[2rem]">
 
-          {/* Name attribute for select is neccessary otherwise no data will be submitted */}
-          {/* Id attribute associates it with a label */}
-          <select name="catgories" id="categories" required={true} onChange={handleCategoryChange} >
-            <option>Select</option>
+          <div className="flex flex-row h-[20%] items-center justify-between">
+            <span className="font-semibold text-neutral-700 text-2xl ml-[1rem]">Products</span>
 
-            {allCategories && allCategories.map(c => (
-              <option key={c._id} value={c._id}>{c.name}</option>
-            ))}
-          </select>
+            <div className="flex flex-row items-end gap-5">
+              <div className="flex flex-row gap-4">
+                <div className="flex flex-row gap-2">
+                  <TbSquareRoundedArrowDown onClick={sortStockLH} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                  <MdAutoGraph onClick={sortSoldHL} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                </div>
 
-          <button className="bg-black text-white px-4 py-2" type="submit">Add</button>
-        </form>
+                <div className="flex flex-row gap-2">
+                  <RiCoinFill onClick={sortPriceLH} className="bg-neutral-200 h-5 w-5 p-1 cursor-pointer hover:text-blue-900 transition duration-200" />
+                  <FaCoins onClick={sortPriceHL} className="bg-neutral-200 h-5 w-5 p-1 cursor-pointer hover:text-blue-900 transition duration-200" />
+                </div>
 
-        <div className="flex flex-col gap-3 mt-[4rem]">
-          {allProducts && (allProducts.length === 0 ? <div>No products have been added yet.</div> : (
-            allProducts.map((p, index) => (
-              <div key={p._id} className="flex flex-row gap-3 items-center align-middle">
+                <div className="flex flex-row gap-2">
+                  <GiFallingStar onClick={sortRatingLH} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                  <PiShootingStarFill onClick={sortRatingHL} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                </div>
 
-                {editableProductId !== p._id && (
-                  <>
-                    <img src={p.image} alt="image.png" className="h-10 w-10" />
-                    <Link to={`/product/${p._id}`} className="hover:text-cyan-600 hover:underline">{p.name}</Link>
-                    <div>{p.description}</div>
-                    <div>Rs.{p.price}</div>
-                    <div>{p.inStock}</div>
-                    <div>{p.categoryName}</div>
-                    <div>{p.discountPercent}%</div>
-                  </>
-                )}
-
-                {editableProductId === p._id && (
-                  <div>Updating {p.name}...</div>
-                )}
-
-                {editableProductId !== p._id && <FaEdit onClick={() => handleEdit(p)} className="cursor-pointer text-cyan-800" />}
-                {editableProductId === p._id && <FaToggleOff onClick={handleExitEdit} className="cursor-pointer text-red-700" />}
-                {!editableProductId && <FaTrash onClick={() => handleDelete(p)} className="cursor-pointer text-red-700" />}
+                <div className="flex flex-row gap-2">
+                  <RiSortAlphabetAsc onClick={sortAZ} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                  <RiSortAlphabetDesc onClick={sortZA} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
+                </div>
               </div>
-            ))
-          ))}
-        </div>
-      </div>
 
+              <button onClick={() => setIsAddOrUpdate(!isAddOrUpdate)} className="bg-blue-700 hover:bg-blue-900 text-white text-2xl px-2 pb-1">+</button>
+            </div>
+          </div>
+
+          <table className="w-full flex flex-col justify-between border-[2px] gap-3 h-[70%] overflow-y-auto">
+            <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
+              <th className="font-semibold">ID</th>
+              <th className="font-semibold w-[10%]">Image</th>
+              <th className="font-semibold w-[17%]">Name</th>
+              <th className="font-semibold w-[17%]">Category</th>
+              <th className="font-semibold w-[9%]">Rating</th>
+              <th className="font-semibold w-[9%]">In Stock</th>
+              <th className="font-semibold w-[9%]">Sold</th>
+              <th className="font-semibold w-[9%]">Price</th>
+              <th className="font-semibold w-[9%]">Discount</th>
+              <th className="font-semibold w-[9%]">Actions</th>
+            </thead>
+
+            {(!isSorted ? allProducts : productsCopy).map((p, index) => (
+              <tr key={p._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-center align-middle">
+                <td className="">{index + 1}</td>
+
+                <td className="w-[10%] flex flex-row justify-center ">
+                  <img src={p.image} alt="img" className="w-7 h-7" />
+                </td>
+
+                <Link to={`/product/${p._id}`} className="w-[17%] hover:text-blue-800 hover:underline flex flex-row justify-center px-4">{p.name.length > 17 ? `${p.name.substring(0, 17)}...` : `${p.name}`}</Link>
+                <td className="w-[17%] flex flex-row justify-center px-4">{p.categoryName}</td>
+                <td className="w-[9%] flex flex-row justify-center px-4">{p.rating}</td>
+                <td className="w-[9%] flex flex-row justify-center px-4">{p.inStock}</td>
+                <td className="w-[9%] flex flex-row justify-center px-4">{p.unitsSold}</td>
+                <td className="w-[9%] flex flex-row justify-center px-4">Rs. {p.price}</td>
+                <td className="w-[9%] flex flex-row justify-center px-4">{p.discountPercent}%</td>
+
+                <td className="w-[9%] flex flex-row gap-2 justify-center px-4">
+                  <lord-icon
+                    class="cursor-pointer"
+                    onClick={() => handleEdit(p)}
+                    src="https://cdn.lordicon.com/oqaajvyl.json"
+                    trigger="hover"
+                    state="hover-line"
+                    stroke="bold"
+                    colors="primary:#000000,secondary:#1d4ed8"
+                    style={{ width: "25px", height: "25px" }}>
+                  </lord-icon>
+
+                  <lord-icon
+                    class="cursor-pointer"
+                    onClick={() => handleDelete(p)}
+                    src="https://cdn.lordicon.com/skkahier.json"
+                    trigger="hover"
+                    stroke="bold"
+                    colors="primary:#c71f16"
+                    style={{ width: "25px", height: "25px" }}>
+                  </lord-icon>
+                </td>
+              </tr>
+            ))}
+          </table>
+        </div>
+
+        {isAddOrUpdate && (
+          <>
+            <div className="overlay flex w-full h-full -mt-[2rem] absolute bg-black opacity-70">
+            </div>
+
+            <div className="overlay flex flex-col gap-4 w-[30%] h-[65%] -mt-[5rem] absolute bg-white opacity-[100%]">
+              <div className="flex flex-col items-end mb-[1rem]">
+                <button className="bg-red-700 hover:bg-red-900 text-white px-2 pb-1" onClick={handleExitEdit}>x</button>
+              </div>
+
+              <span className="justify-center text-center font-semibold text-neutral-700 text-2xl -mt-[1.5rem]">{editableProductId ? "Update Product" : "Add Product"}</span>
+
+              <div className="flex flex-row justify-center w-full px-5 gap-3">
+                <input type="text" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+                <input type="number" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} />
+              </div>
+
+              <input type="text" className="bg-white border-[1px] border-neutral-400 pl-2 py-1 text-md mx-[1.63rem]" placeholder="Image URL" value={image} onChange={e => setImage(e.target.value)} />
+
+              <div className="flex flex-row justify-center w-full px-5 gap-3">
+                <input type="inStock" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Count in Stock" value={inStock} onChange={e => setInStock(e.target.value)} />
+
+                <select name="categories" id="categories" required={true} onChange={handleCategoryChange} className={`bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md ${category === "x" ? "text-neutral-400" : "text-black"}`}>
+                  <option value="">Category</option>
+
+                  {allCategories && allCategories.map(c => (
+                    <option value={c._id} key={c._id}>{c.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="border-[1px] border-neutral-400 mx-[1.63rem] pl-2 py-1"></textarea>
+
+              <div className="flex flex-row justify-center">
+                <button onClick={handleSubmit} className="px-4 py-2 bg-blue-900 hover:bg-blue-700 text-white w-fit rounded-xl">Submit</button>
+              </div>
+            </div>
+          </>
+        )}
+
+      </div >
     </>
   )
 }

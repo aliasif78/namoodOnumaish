@@ -34,6 +34,11 @@ const placeOrder = asyncHandler(async (req, res) => {
             totalPrice
         })
 
+        const products = await Product.find({})
+
+        for (const i of orderItems)
+            await Product.updateOne({_id: i.productId}, {$inc: {unitsSold: i.productQuantity}})
+
         const placedOrder = await order.save()
         return res.status(200).json(placedOrder)
     }
@@ -105,11 +110,11 @@ const updateOrder = asyncHandler(async (req, res) => {
             console.error("Order not found.")
             return res.status(404).json({ error: "Order not found." })
         }
-        
+
         orignalOrder.isShipped = isShipped
         orignalOrder.isPaid = isPaid
         orignalOrder.isDelivered = isDelivered
-        
+
         const updatedOrder = await orignalOrder.save()
         return res.status(200).json(updatedOrder)
     }
@@ -119,6 +124,5 @@ const updateOrder = asyncHandler(async (req, res) => {
         return res.status(500).json({ error: "Internal server error." })
     }
 })
-
 
 export { placeOrder, deleteOrder, updateOrder, getAllOrders, getOrderById }

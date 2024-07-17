@@ -1,0 +1,18 @@
+/*.my-scrollable-element {
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.my-scrollable-element::-webkit-scrollbar {
+    display: none;
+}
+
+html,
+body {
+    overflow: hidden;
+}
+*/
+.overlay {
+    z-index: 9998;
+}
