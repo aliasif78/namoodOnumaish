@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useParams } from "react-router"
 import { useGetOrderByIdQuery, useUpdateOrderMutation } from "../../redux/api/orderApiSlice"
 import { toast } from 'react-toastify'
+import { RxDotsVertical } from "react-icons/rx";
+import { Link } from 'react-router-dom'
 
 const OrderDetails = () => {
     const { id } = useParams()
@@ -55,7 +57,162 @@ const OrderDetails = () => {
 
     return (
         <>
-            <div className="flex flex-col w-full justify-between items-center align-middle gap-1">
+            <main className="flex flex-row w-full -mt-[1rem]">
+                <section className="flex flex-col gap-[3rem] w-[60%] p-[3rem]">
+                    <div className="flex flex-col justify-start">
+                        <h1 className="text-3xl font-semibold">Order</h1>
+                        <span className="text-neutral-500">Confirmed September 10</span>
+                    </div>
+
+                    <div className="flex flex-col justify-start gap-[2rem] bg-white rounded-lg p-[2rem]">
+                        <div className="flex flex-row items-end justify-between">
+                            <div className="flex flex-col justify-start gap-1">
+                                <h1 className="text-2xl font-semibold">Expected September 17</h1>
+                                <span className="text-neutral-500">Islamabad</span>
+                            </div>
+
+                            <span className="text-neutral-500">#{order._id}</span>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="flex flex-row gap-3 items-center">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/oqdmuxru.json"
+                                        trigger="hover"
+                                        stroke="bold"
+                                        colors="primary:#000000,secondary:#6B7C65"
+                                        style={{ width: "35px", height: "30px" }}>
+                                    </lord-icon>
+
+                                    <h1 className="text-lg font-bold">Delivered</h1>
+                                </div>
+
+                                <div className="flex flex-row gap-3 items-center ml-2">
+                                    <RxDotsVertical className="h-[20px] w-[20px]" />
+                                    <h1 className="text-sm">September 17</h1>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                                <div className="flex flex-row gap-3 items-center">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/zzjjvkam.json"
+                                        trigger="hover"
+                                        stroke="bold"
+                                        colors="primary:#000000,secondary:#6B7C65"
+                                        style={{ width: "35px", height: "30px" }}>
+                                    </lord-icon>
+
+                                    <h1 className="text-lg font-bold">Shipped</h1>
+                                </div>
+
+                                <div className="flex flex-row gap-3 items-center ml-2">
+                                    <RxDotsVertical className="h-[20px] w-[20px]" />
+                                    <h1 className="text-sm">September 14</h1>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-2">
+                                <div className="flex flex-row gap-3 items-center">
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/wyqtxzeh.json"
+                                        trigger="hover"
+                                        stroke="bold"
+                                        colors="primary:#000000,secondary:#6B7C65"
+                                        style={{ width: "35px", height: "30px" }}>
+                                    </lord-icon>
+
+                                    <h1 className="text-lg font-bold">Paid</h1>
+                                </div>
+
+                                <div className="flex flex-row gap-3 items-center ml-2">
+                                    <RxDotsVertical className="h-[20px] w-[20px]" />
+                                    <h1 className="text-sm">September 11</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col justify-start gap-[2rem] bg-white rounded-lg p-[2rem]">
+                        <h1 className="text-2xl font-semibold">Shipping Details</h1>
+
+                        <div className="flex flex-row w-full gap-[10rem]">
+                            <div className="flex flex-col justify-between gap-[1rem]">
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">Name</label>
+                                    <p className="text-lg">Ali Asif</p>
+                                </div>
+
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">Email Address</label>
+                                    <p className="text-lg">aliasif1171@gmail.com</p>
+                                </div>
+
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">Payment Method</label>
+                                    <p className="text-lg">Bank Transfer</p>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col justify-between gap-[1rem]">
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">City</label>
+                                    <p className="text-lg">Islamabad</p>
+                                </div>
+
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">Postal Code</label>
+                                    <p className="text-lg">44000</p>
+                                </div>
+
+                                <div className="flex flex-col justify-start text-start items-start">
+                                    <label htmlFor="name" className="text-neutral-500 text-md">Delivery Address</label>
+                                    <p className="text-lg">G-13/1, Street 79, House 16</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="flex flex-col bg-[#ffffff] h-screen w-[40%] gap-[3rem] p-[3rem]">
+                    <div className="flex flex-row items-end justify-between gap-3">
+                        <div className="flex flex-row justify-start gap-3">
+                            <img src="https://www.vsurfaces.com/cdn/shop/files/modern-cloud-couch-with-soft-boucle-upholstered-7-seaters-comfy-couch-for-living-room-home-office-648907.jpg?v=1714469587&width=1800" alt="" className="h-16 w-16" />
+
+                            <div className="flex flex-col justify-center">
+                                <h1 className="font-normal">Vintage Table</h1>
+                                <p className="font-light">x1</p>
+                            </div>
+                        </div>
+
+                        <span className="font-normal">Rs. 15,000</span>
+                    </div>
+
+                    <span className="h-[1px] -mt-[1rem] w-full bg-neutral-400"></span>
+
+                    <Link to='/shop' className="flex flex-row justify-center bg-black text-white border-[2px] border-black hover:bg-white hover:text-black font-semibold px-4 py-2 -mt-[2rem] transition duration-200">Shop More</Link>
+
+                    <div className="flex flex-col gap-2">
+                        <div className="flex flex-row justify-between">
+                            <span className="font-normal text-sm">Subtotal</span>
+                            <span className="font-normal text-sm">Rs. 15,000</span>
+                        </div>
+
+                        <div className="flex flex-row justify-between">
+                            <span className="font-normal text-sm">Shipping</span>
+                            <span className="font-normal text-sm">Rs. 150</span>
+                        </div>
+
+                        <div className="flex flex-row justify-between">
+                            <span className="text-xl font-semibold">Total</span>
+                            <span className="text-xl font-semibold">Rs. 15,150</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            {/* <div className="flex flex-col w-full justify-between items-center align-middle gap-1">
                 <div>{order._id}</div>
                 <div>{order.user}</div>
                 <div>{order.shippingDetails.name}</div>
@@ -86,7 +243,7 @@ const OrderDetails = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

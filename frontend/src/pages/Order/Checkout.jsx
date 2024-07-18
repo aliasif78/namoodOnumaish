@@ -150,6 +150,10 @@ const Checkout = () => {
                         <span className="font-normal">Rs. 15,000</span>
                     </div>
 
+                    <span className="h-[1px] -mt-[1rem] w-full bg-neutral-400"></span>
+
+                    <button className="bg-black text-white border-[2px] border-black hover:bg-white hover:text-black font-semibold px-4 py-2 -mt-[2rem] transition duration-200">Place Order</button>
+
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row justify-between">
                             <span className="font-normal text-sm">Subtotal</span>
@@ -168,6 +172,7 @@ const Checkout = () => {
                     </div>
                 </section>
             </main>
+
             {/* <form onSubmit={handleSubmit} action="submit" className="mt-[3rem] w-full h-full flex flex-col justify-center align-middle items-center gap-4">
                 <input onChange={e => setName(e.target.value)} value={name} type="text" placeholder="Name" />
                 <input onChange={e => setEmail(e.target.value)} value={email} type="text" placeholder="Email" />
