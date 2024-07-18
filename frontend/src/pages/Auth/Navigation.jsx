@@ -24,32 +24,32 @@ export const Navigation = () => {
 
     return (
         <>
-            <div className="sticky z-50 w-full h-14 top-0 bg-black text-white flex justify-between items-center align-middle px-[2rem]">
-                <span className='cursor-default hover:text-cyan-300'>Logo</span>
+            <div className="text-xs sm:text-lg sticky z-50 w-full h-14 top-0 bg-black text-white flex justify-between items-center align-middle px-[2rem]">
+                <span className='cursor-default hover:text-[#9fb597]'>Logo</span>
 
-                <div className='flex w-full justify-center gap-[4rem]'>
+                <div className='flex flex-row w-[50%] sm:w-[30%] justify-between'>
                     <Link to='/'>
-                        <span className='cursor-pointer hover:text-cyan-300'>Home</span>
+                        <span className='cursor-pointer hover:text-[#9fb597]'>Home</span>
                     </Link>
 
                     <Link to='/shop'>
-                        <span className='cursor-pointer hover:text-cyan-300'>Shop</span>
+                        <span className='cursor-pointer hover:text-[#9fb597]'>Shop</span>
                     </Link>
 
                     <Link to='/contactus'>
-                        <span className='cursor-pointer hover:text-cyan-300'>Contact Us</span>
+                        <span className='cursor-pointer hover:text-[#9fb597]'>Contact Us</span>
                     </Link>
                 </div>
 
                 <div className='flex w-fit gap-5'>
                     <Link to='/cart'>
-                        <AiOutlineShoppingCart className='h-6 w-6 cursor-pointer hover:text-cyan-300' />
+                        <AiOutlineShoppingCart className='h-6 w-6 cursor-pointer hover:text-[#9fb597]' />
                     </Link>
 
                     {userInfo ? (
                         <div className='relative'>
                             <button onClick={() => toggleDropDown()}>
-                                <AiOutlineSetting className='h-6 w-6 cursor-pointer hover:text-cyan-300' />
+                                <AiOutlineSetting className='h-6 w-6 cursor-pointer hover:text-[#9fb597]' />
                             </button>
 
                             {dropDownOpen && (

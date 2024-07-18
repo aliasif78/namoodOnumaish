@@ -21,6 +21,7 @@ import Checkout from './pages/Order/Checkout.jsx'
 import Orders from './pages/Admin/Orders.jsx'
 import OrderDetails from './pages/Order/OrderDetails.jsx'
 import ContactUs from './pages/ContactUs.jsx'
+import Shop from './pages/Shop.jsx'
 
 // Components
 import PrivateRoute from './components/PrivateRoute.jsx'
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<Cart />}></Route>
       <Route path='/checkout' element={<Checkout />}></Route>
       <Route path='/contactus' element={<ContactUs />}></Route>
+      <Route path='/shop' element={<Shop />}></Route>
 
       {/* Private Routes */}
       <Route path='' element={<PrivateRoute />}>

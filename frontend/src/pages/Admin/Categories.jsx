@@ -150,20 +150,20 @@ const Categories = () => {
           </div>
 
           <table className="w-full flex flex-col justify-between border-[2px] h-[70%] overflow-y-auto">
-            <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
-              <th className="font-semibold w-[10%]">Index</th>
-              <th className="font-semibold w-[40%]">ID</th>
-              <th className="font-semibold w-[40%]">Name</th>
-              <th className="font-semibold w-[10%]">Actions</th>
+            <thead className="flex flex-row justify-start text-neutral-500 text-xs sm:text-sm border-b-2 p-2 bg-[#f0f0f3]">
+              <th className="flex flex-row justify-center font-semibold w-[10%]">Index</th>
+              <th className="hidden md:block text-center font-semibold w-[40%]">ID</th>
+              <th className="flex flex-row justify-center font-semibold w-[50%] md:w-[40%]">Name</th>
+              <th className="flex flex-row justify-center font-semibold w-[40%] md:w-[10%]">Actions</th>
             </thead>
 
             {(!isSorted ? categories : categoriesCopy).map((c, index) => (
-              <tr key={c._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-center align-middle">
+              <tr key={c._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-start align-middle text-sm sm:text-base">
                 <td className="w-[10%] flex flex-row justify-center">{index + 1}</td>
-                <td className="w-[40%] flex flex-row justify-center px-4">{c._id}</td>
-                <td className="w-[40%] flex flex-row justify-center px-4">{c.name}</td>
+                <td className="hidden md:block w-[40%] justify-center text-center px-4">{c._id}</td>
+                <td className="w-[50%] md:w-[40%] flex flex-row justify-center px-4">{c.name}</td>
 
-                <td className="w-[10%] flex flex-row gap-2 justify-center px-4">
+                <td className="flex flex-row gap-2 justify-center px-4 w-[40%] md:w-[10%]">
                   <lord-icon
                     class="cursor-pointer"
                     onClick={() => handleEdit(c)}
