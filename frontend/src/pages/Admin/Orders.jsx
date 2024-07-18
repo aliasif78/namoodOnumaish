@@ -237,7 +237,7 @@ const Orders = () => {
                         <span className="font-semibold text-neutral-700 text-2xl ml-[1rem]">Orders</span>
 
                         <div className="flex flex-row items-end gap-5">
-                            <div className="flex flex-row gap-4">
+                            <div className="hidden sm:flex flex-row gap-4">
                                 <div className="flex flex-row gap-2">
                                     <MdLocalShipping onClick={sortShipped} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
                                     <FaSackDollar onClick={sortPaid} className="bg-neutral-200 h-5 w-5 p-1 cursor-pointer hover:text-blue-900 transition duration-200" />
@@ -273,43 +273,43 @@ const Orders = () => {
                     </div>
 
                     <table className="w-full flex flex-col justify-between border-[2px] gap-3 h-[70%] overflow-y-auto">
-                        <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
-                            <th className="font-semibold">ID</th>
-                            <th className="font-semibold w-[15%]">Name</th>
-                            <th className="font-semibold w-[15%]">Email</th>
-                            <th className="font-semibold w-[15%]">Phone Number</th>
-                            <th className="font-semibold w-[7%]">City</th>
-                            <th className="font-semibold w-[15%]">Payment Method</th>
-                            <th className="font-semibold w-[5%]">Shipped</th>
-                            <th className="font-semibold w-[5%]">Paid</th>
-                            <th className="font-semibold w-[5%]">Delivered</th>
-                            <th className="font-semibold w-[11%]">Price</th>
-                            <th className="font-semibold w-[6%]">Actions</th>
+                        <thead className="flex flex-row justify-center text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
+                            <th className="font-semibold w-[2%]">ID</th>
+                            <th className="font-semibold w-[33%] sm:w-[23%] xl:w-[15%]">Name</th>
+                            <th className="hidden xl:block text-center font-semibold w-[15%]">Email</th>
+                            <th className="hidden xl:block text-center font-semibold w-[15%]">Phone Number</th>
+                            <th className="hidden xl:block text-center font-semibold w-[7%]">City</th>
+                            <th className="hidden md:block font-semibold text-xs lg:text-sm w-[15%]">Payment Method</th>
+                            <th className="font-semibold hidden sm:flex flex-row justify-center w-[10%] xl:w-[5%]">Shipped</th>
+                            <th className="font-semibold hidden sm:flex flex-row justify-center w-[10%] xl:w-[5%]">Paid</th>
+                            <th className="font-semibold hidden sm:flex flex-row justify-center w-[10%] xl:w-[5%]">Delivered</th>
+                            <th className="font-semibold xl:w-[11%] sm:w-[20%] w-[40%]">Price</th>
+                            <th className="font-semibold w-[6%] xl:w-[9%]">Actions</th>
                         </thead>
 
                         {(!isSorted ? orders : ordersCopy).map((o, index) => (
-                            <tr key={o._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-center align-middle">
-                                <td className="">{index + 1}</td>
-                                <td className="w-[15%] flex flex-row justify-center ">{o.shippingDetails.name}</td>
-                                <td className="w-[15%] flex flex-row justify-center ">{o.shippingDetails.email}</td>
-                                <td className="w-[15%] flex flex-row justify-center px-4">{o.shippingDetails.phoneNumber}</td>
-                                <td className="w-[7%] flex flex-row justify-center px-4">{o.shippingDetails.city}</td>
-                                <td className="w-[15%] flex flex-row justify-center">
+                            <tr key={o._id} className="flex flex-row p-2 border-b-[1.5px] justify-center">
+                                <td className="flex flex-row justify-center w-[2%]">{index + 1}</td>
+                                <td className="w-[33%] sm:w-[23%] xl:w-[15%] flex flex-row justify-center">{o.shippingDetails.name}</td>
+                                <td className="hidden xl:block w-[15%] text-center">{o.shippingDetails.email}</td>
+                                <td className="hidden xl:block w-[15%] text-center px-4">{o.shippingDetails.phoneNumber}</td>
+                                <td className="hidden xl:block w-[7%] text-center px-4">{o.shippingDetails.city}</td>
+                                <td className="hidden md:flex w-[15%] justify-center">
                                     {o.shippingDetails.paymentMethod === "Cash On Delivery" ? <FaMoneyBillWave className="text-emerald-600 size-6 " /> : o.shippingDetails.paymentMethod === "Bank Transfer" ? <AiFillBank className="text-black size-6 " /> : <img src={easyPaisa} alt="." className="size-6"></img>}
                                 </td>
 
-                                {!o.isShipped && <button onClick={() => handleUpdateOrder("shipped", o)} className="text-red-600 flex flex-row justify-center items-center w-[5%]"><ImCross /></button>}
-                                {o.isShipped && <button onClick={() => handleUpdateOrder("notShipped", o)} className="text-green-600 flex flex-row justify-center items-center w-[5%] text-xl"><FaCheck /></button>}
+                                {!o.isShipped && <button onClick={() => handleUpdateOrder("shipped", o)} className="text-red-600 hidden sm:flex flex-row justify-center items-center w-[10%] xl:w-[5%]"><ImCross /></button>}
+                                {o.isShipped && <button onClick={() => handleUpdateOrder("notShipped", o)} className="text-green-600 hidden sm:flex flex-row justify-center items-center w-[10%] xl:w-[5%] text-xl"><FaCheck /></button>}
 
-                                {!o.isPaid && <button onClick={() => handleUpdateOrder("paid", o)} className="text-red-600 flex flex-row justify-center items-center w-[5%]"><ImCross /></button>}
-                                {o.isPaid && <button onClick={() => handleUpdateOrder("notPaid", o)} className="text-green-600 flex flex-row justify-center items-center w-[5%] text-xl"><FaCheck /></button>}
+                                {!o.isPaid && <button onClick={() => handleUpdateOrder("paid", o)} className="text-red-600 sm:flex flex-row hidden justify-center items-center w-[10%] xl:w-[5%]"><ImCross /></button>}
+                                {o.isPaid && <button onClick={() => handleUpdateOrder("notPaid", o)} className="text-green-600 sm:flex flex-row hidden justify-center items-center w-[10%] xl:w-[5%] text-xl"><FaCheck /></button>}
 
-                                {!o.isDelivered && <button onClick={() => handleUpdateOrder("delivered", o)} className="text-red-600 flex flex-row justify-center items-center w-[5%]"><ImCross /></button>}
-                                {o.isDelivered && <button onClick={() => handleUpdateOrder("notDelivered", o)} className="text-green-600 flex flex-row justify-center items-center w-[5%] text-xl"><FaCheck /></button>}
+                                {!o.isDelivered && <button onClick={() => handleUpdateOrder("delivered", o)} className="text-red-600 hidden sm:flex flex-row justify-center items-center w-[10%] xl:w-[5%]"><ImCross /></button>}
+                                {o.isDelivered && <button onClick={() => handleUpdateOrder("notDelivered", o)} className="text-green-600 hidden sm:flex flex-row justify-center items-center w-[10%] xl:w-[5%] text-xl"><FaCheck /></button>}
 
-                                <td className="w-[11%] flex flex-row justify-center px-4">Rs. {o.totalPrice}</td>
+                                <td className="w-[40%] sm:w-[20%] xl:w-[11%] flex flex-row justify-center px-4">Rs. {o.totalPrice}</td>
 
-                                <td className="w-[6%] flex flex-row gap-2 justify-center">
+                                <td className="w-[6%] xl:w-[9%] flex flex-row gap-2 justify-center">
                                     <Link to={`/admin/orders/${o._id}`}>
                                         <lord-icon
                                             class="cursor-pointer"
