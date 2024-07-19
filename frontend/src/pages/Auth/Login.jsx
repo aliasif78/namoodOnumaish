@@ -46,12 +46,12 @@ const Login = () => {
             <div className='flex flex-col items-center align-middle w-full h-full mt-[2rem]'>
                 <h1 className='text-4xl font-semibold'>Login</h1>
 
-                <form className='flex flex-col gap-4 mt-[2rem] items-center' onSubmit={submitHandler}>
-                    <input type="email" id='email' placeholder='Email' className='rounded-xl w-[25rem] h-[3rem] border-[1.5px] border-neutral-400 pl-4' value={email} onChange={e => setEmail(e.target.value)} />
+                <form className='flex flex-col gap-4 mt-[2rem] w-full items-center' onSubmit={submitHandler}>
+                    <input type="email" id='email' placeholder='Email' className='rounded-xl w-[70%] sm:w-[25rem] h-[3rem] border-[1.5px] border-neutral-400 pl-4' value={email} onChange={e => setEmail(e.target.value)} />
 
-                    <input type="password" id='password' placeholder='Password' className='rounded-xl w-[25rem] h-[3rem] border-[1.5px] border-neutral-400 pl-4' value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type="password" id='password' placeholder='Password' className='rounded-xl w-[70%] sm:w-[25rem] h-[3rem] border-[1.5px] border-neutral-400 pl-4' value={password} onChange={e => setPassword(e.target.value)} />
 
-                    <button type='submit' className='bg-pink-600 hover:bg-pink-700 text-white w-[70%] px-4 py-2 rounded-lg cursor-pointer mt-3'>Enter</button>
+                    <button type='submit' className='bg-[#758e6c] hover:bg-[#60705b] transition duration-200 text-white w-[70%] sm:w-[25rem] px-4 py-2 rounded-lg cursor-pointer mt-3'>Enter</button>
                 </form>
 
                 <div className='flex flex-row gap-2 mt-2'>

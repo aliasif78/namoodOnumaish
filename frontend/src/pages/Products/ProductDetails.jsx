@@ -90,8 +90,8 @@ const ProductDetails = () => {
 
   return (
     <>
-      <div className="flex flex-row gap-[3rem] px-[3rem] pt-[1.8rem]">
-        <img src="https://www.vsurfaces.com/cdn/shop/files/modern-cloud-couch-with-soft-boucle-upholstered-7-seaters-comfy-couch-for-living-room-home-office-648907.jpg?v=1714469587&width=1800" alt="img" className="w-[28rem] h-[28rem]" />
+      <div className="flex flex-col md:flex-row items-center md:items-start gap-[3rem] px-[3rem] pt-[1.8rem]">
+        <img src="https://www.vsurfaces.com/cdn/shop/files/modern-cloud-couch-with-soft-boucle-upholstered-7-seaters-comfy-couch-for-living-room-home-office-648907.jpg?v=1714469587&width=1800" alt="img" className="w-[75%] md:w-[65%] lg:w-[28rem] h-[50%] lg:h-[28rem]" />
 
         <div className="flex flex-col justify-center gap-[1rem]">
           <h1 className="text-3xl">Vintage Round Table</h1>
@@ -167,10 +167,10 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-[3rem] w-full justify-center text-center mt-[10rem]">
+      <div className="flex flex-col gap-[3rem] w-full justify-center text-center mt-[7rem]">
         <h1 className="text-3xl">Customer Reviews</h1>
 
-        <div className="flex flex-row gap-[5rem] px-[10rem] justify-center">
+        <div className="flex flex-col md:flex-row gap-[2rem] -mt-[1rem] md:gap-[5rem] px-[3rem] lg:px-[7rem] justify-center items-center">
           <div className="flex flex-col gap-1 justify-center">
             <div className="flex flex-row gap-1 justify-center">
               <AiFillStar className="text-[#c0a300] w-5 h-5" />
@@ -275,8 +275,8 @@ const ProductDetails = () => {
         </div>
 
         <div className="flex flex-col gap-[3rem] h-fit w-full">
-          <div className="flex flex-col gap-3 w-full justify-center items-start border-[1px] border-neutral-300 py-[1rem] px-[15rem]">
-            <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col gap-3 w-full border-[1px] border-neutral-300 py-[1rem] px-[2rem] sm:px-[5rem]">
+            <div className="flex flex-row w-full gap-[1.5rem]">
               <div className="flex flex-row gap-1">
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
@@ -293,11 +293,11 @@ const ProductDetails = () => {
               <span className="bg-black text-white text-xs px-2 pt-1.5">Verified</span>
             </div>
 
-            <p className="text-sm w-[70%] text-start">It was an amazing and loving card with great quality 😍 absolutely loved it</p>
+            <p className="text-sm w-full text-start">It was an amazing and loving card with great quality 😍 absolutely loved it</p>
           </div>
 
-          <div className="flex flex-col gap-3 w-full justify-center items-start border-[1px] border-neutral-300 py-[1rem] px-[15rem]">
-            <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col gap-3 w-full border-[1px] border-neutral-300 py-[1rem] px-[2rem] sm:px-[5rem]">
+            <div className="flex flex-row w-full gap-[1.5rem]">
               <div className="flex flex-row gap-1">
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
@@ -314,11 +314,11 @@ const ProductDetails = () => {
               <span className="bg-black text-white text-xs px-2 pt-1.5">Verified</span>
             </div>
 
-            <p className="text-sm w-[70%] text-start">i ordered relationship id card its lovely and best way to remind the special day and card quality is excellent</p>
+            <p className="text-sm w-full text-start">i ordered relationship id card its lovely and best way to remind the special day and card quality is excellent</p>
           </div>
 
-          <div className="flex flex-col gap-3 w-full justify-center items-start border-[1px] border-neutral-300 py-[1rem] px-[15rem]">
-            <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col gap-3 w-full border-[1px] border-neutral-300 py-[1rem] px-[2rem] sm:px-[5rem]">
+            <div className="flex flex-row w-full gap-[1.5rem]">
               <div className="flex flex-row gap-1">
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
@@ -335,11 +335,11 @@ const ProductDetails = () => {
               <span className="bg-black text-white text-xs px-2 pt-1.5">Verified</span>
             </div>
 
-            <p className="text-sm w-[70%] text-start">It's amazing ❤️</p>
+            <p className="text-sm w-full text-start">It's amazing ❤️</p>
           </div>
 
-          <div className="flex flex-col gap-3 w-full justify-center items-start border-[1px] border-neutral-300 py-[1rem] px-[15rem]">
-            <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col gap-3 w-full border-[1px] border-neutral-300 py-[1rem] px-[2rem] sm:px-[5rem]">
+            <div className="flex flex-row w-full gap-[1.5rem]">
               <div className="flex flex-row gap-1">
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
@@ -356,11 +356,11 @@ const ProductDetails = () => {
               <span className="bg-black text-white text-xs px-2 pt-1.5">Verified</span>
             </div>
 
-            <p className="text-sm w-[70%] text-start">It’s great!</p>
+            <p className="text-sm w-full text-start">It's great!</p>
           </div>
 
-          <div className="flex flex-col gap-3 w-full justify-center items-start border-[1px] border-neutral-300 py-[1rem] px-[15rem]">
-            <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col gap-3 w-full border-[1px] border-neutral-300 py-[1rem] px-[2rem] sm:px-[5rem]">
+            <div className="flex flex-row w-full gap-[1.5rem]">
               <div className="flex flex-row gap-1">
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
                 <AiFillStar className="text-[#87a97d] w-5 h-5" />
@@ -377,7 +377,7 @@ const ProductDetails = () => {
               <span className="bg-black text-white text-xs px-2 pt-1.5">Verified</span>
             </div>
 
-            <p className="text-sm w-[70%] text-start">I just love this it's totally fulfill mine expectations or the reason for what I orderderd this is close to my heart or the mini cards you sent me are so cute thanku soo much I will shop again.</p>
+            <p className="text-sm w-full text-start">I just love this it's totally fulfill mine expectations or the reason for what I orderderd this is close to my heart or the mini cards you sent me are so cute thanku soo much I will shop again.</p>
           </div>
         </div>
       </div>

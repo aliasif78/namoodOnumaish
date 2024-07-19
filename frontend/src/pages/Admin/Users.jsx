@@ -78,23 +78,23 @@ const Users = () => {
                         </div>
                     </div>
 
-                    <table className="w-full flex flex-col justify-between border-[2px] h-[70%] overflow-y-auto">
+                    <table className="w-full flex flex-col justify-between border-[2px] h-[70%] overflow-y-auto text-xs sm:text-base">
                         <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
                             <th className="font-semibold w-[10%]">Index</th>
-                            <th className="font-semibold w-[40%]">ID</th>
-                            <th className="font-semibold w-[40%]">Username</th>
-                            <th className="font-semibold w-[40%]">Email</th>
-                            <th className="font-semibold w-[10%]">Actions</th>
+                            <th className="font-semibold w-[40%] hidden md:flex flex-row justify-center">ID</th>
+                            <th className="font-semibold w-[25%] md:w-[15%] hidden sm:flex flex-row justify-center">Username</th>
+                            <th className="font-semibold w-[65%] sm:w-[45%] md:w-[25%]">Email</th>
+                            <th className="font-semibold w-[25%] md:w-[10%]">Actions</th>
                         </thead>
 
                         {(!isSorted ? users : usersCopy).map((u, index) => (
-                            <tr key={u._id} className="flex flex-row px-2 border-b-[1.5px] justify-center align-middle">
+                            <tr key={u._id} className="flex flex-row px-2 border-b-[1.5px] justify-center text-center items-center">
                                 <td className="w-[10%] flex flex-row justify-center">{index + 1}</td>
-                                <td className="w-[40%] flex flex-row justify-center px-4">{u._id}</td>
-                                <td className="w-[40%] flex flex-row justify-center px-4">{u.username}</td>
-                                <td className="w-[40%] flex flex-row justify-center px-4">{u.email}</td>
+                                <td className="w-[40%] hidden md:flex flex-row justify-center">{u._id}</td>
+                                <td className="w-[25%] md:w-[15%] hidden sm:flex flex-row justify-center">{u.username}</td>
+                                <td className="w-[65%] sm:w-[45%] md:w-[25%] flex flex-row justify-center">{u.email}</td>
 
-                                <td className="w-[10%] flex flex-row gap-2 justify-center px-4">
+                                <td className="w-[25%] md:w-[10%] flex flex-row gap-2 justify-center px-4">
                                     <lord-icon
                                         class="cursor-pointer"
                                         onClick={() => handleDelete(u)}

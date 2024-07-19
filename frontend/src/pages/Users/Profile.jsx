@@ -11,10 +11,10 @@ const Profile = ({ id }) => {
 
     return (
         <>
-            <div className="flex flex-col p-[5rem] gap-[2rem] -mt-[3rem]">
+            <div className="flex flex-col p-[2rem] sm:p-[5rem] gap-[2rem] sm:-mt-[3rem]">
                 <h1 className="text-3xl font-semibold ml-[2rem]">Profile</h1>
 
-                <div className="flex flex-row justify-between bg-white rounded-xl py-[2rem] px-[4rem] gap-[1rem]">
+                <div className="flex flex-col sm:flex-row justify-between bg-white rounded-xl py-[2rem] px-[2rem] sm:px-[4rem] gap-[1rem]">
                     <div className="flex flex-col gap-1">
                         <div className="flex flex-row gap-2 items-center">
                             <label htmlFor="name" className='text-md text-neutral-500'>Userame</label>
@@ -36,7 +36,7 @@ const Profile = ({ id }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-row justify-between bg-white rounded-xl py-[2rem] px-[4rem]">
+                <div className="flex flex-col md:flex-row gap-[2rem] md:gap-[0rem] justify-between bg-white rounded-xl py-[2rem] px-[2rem] sm:px-[4rem]">
                     <div className="flex flex-col gap-[1rem]">
                         <h1 className='text-2xl font-semibold'>Orders</h1>
 
@@ -56,8 +56,8 @@ const Profile = ({ id }) => {
                         </div>
                     </div>
 
-                    <div className="div flex flex-col gap-1 h-[10rem] overflow-y-scroll bg-black p-[1rem]">
-                        <div className="flex flex-row gap-3">
+                    <div className="div flex flex-col items-center gap-1 h-[10rem] overflow-y-scroll bg-black p-[1rem]">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -70,7 +70,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -83,7 +83,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -96,20 +96,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-row gap-3">
-                            <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
-
-                            <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
-                                <lord-icon
-                                    src="https://cdn.lordicon.com/jnzhohhs.json"
-                                    trigger="hover"
-                                    colors="primary:#ffffff"
-                                    style={{ width: "25px", height: "25px" }}>
-                                </lord-icon>
-                            </Link>
-                        </div>
-                        
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -122,7 +109,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -135,7 +122,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -148,7 +135,7 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
@@ -161,7 +148,20 @@ const Profile = ({ id }) => {
                             </Link>
                         </div>
                         
-                        <div className="flex flex-row gap-3">
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
+                            <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
+
+                            <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com/jnzhohhs.json"
+                                    trigger="hover"
+                                    colors="primary:#ffffff"
+                                    style={{ width: "25px", height: "25px" }}>
+                                </lord-icon>
+                            </Link>
+                        </div>
+                        
+                        <div className="flex flex-row gap-3 sm:text-base text-xs">
                             <span className='text-neutral-300'>#668e75fb3a73fb39d63644d2</span>
 
                             <Link to='/admin/orders/668e75fb3a73fb39d63644d2'>

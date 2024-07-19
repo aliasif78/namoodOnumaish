@@ -305,7 +305,7 @@ const Products = () => {
             <span className="font-semibold text-neutral-700 text-2xl ml-[1rem]">Products</span>
 
             <div className="flex flex-row items-end gap-5">
-              <div className="flex flex-row gap-4">
+              <div className="hidden sm:flex flex-row gap-4">
                 <div className="flex flex-row gap-2">
                   <TbSquareRoundedArrowDown onClick={sortStockLH} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
                   <MdAutoGraph onClick={sortSoldHL} className="bg-neutral-200 h-5 w-5 p-0.5 cursor-pointer hover:text-blue-900 transition duration-200" />
@@ -331,37 +331,37 @@ const Products = () => {
             </div>
           </div>
 
-          <table className="w-full flex flex-col justify-between border-[2px] gap-3 h-[70%] overflow-y-auto">
+          <table className="w-full flex flex-col justify-between border-[2px] gap-3 h-[70%] overflow-y-auto text-xs sm:text-base">
             <thead className="flex flex-row justify-start text-neutral-500 text-sm border-b-2 p-2 bg-[#f0f0f3]">
               <th className="font-semibold">ID</th>
-              <th className="font-semibold w-[10%]">Image</th>
-              <th className="font-semibold w-[17%]">Name</th>
-              <th className="font-semibold w-[17%]">Category</th>
-              <th className="font-semibold w-[9%]">Rating</th>
-              <th className="font-semibold w-[9%]">In Stock</th>
-              <th className="font-semibold w-[9%]">Sold</th>
-              <th className="font-semibold w-[9%]">Price</th>
-              <th className="font-semibold w-[9%]">Discount</th>
-              <th className="font-semibold w-[9%]">Actions</th>
+              <th className="font-semibold hidden md:flex flex-row justify-center w-[10%]">Image</th>
+              <th className="font-semibold w-[35%] sm:w-[25%] md:w-[17%]">Name</th>
+              <th className="font-semibold w-[17%] hidden md:flex justify-center">Category</th>
+              <th className="font-semibold hidden sm:flex flex-row justify-center lg:w-[7%] w-[10%]">Rating</th>
+              <th className="font-semibold hidden sm:flex flex-row justify-center lg:w-[7%] md:w-[10%] w-[13%]">In Stock</th>
+              <th className="font-semibold hidden sm:flex flex-row justify-center lg:w-[7%] w-[10%]">Sold</th>
+              <th className="font-semibold md:w-[15%] sm:w-[20%] w-[30%]">Price</th>
+              <th className="font-semibold w-[9%] hidden lg:flex justify-center">Discount</th>
+              <th className="font-semibold w-[29%] sm:w-[19%] md:w-[9%]">Actions</th>
             </thead>
 
             {(!isSorted ? allProducts : productsCopy).map((p, index) => (
               <tr key={p._id} className="flex flex-row px-2 pb-2.5 border-b-[1.5px] justify-center align-middle">
                 <td className="">{index + 1}</td>
 
-                <td className="w-[10%] flex flex-row justify-center ">
+                <td className="w-[10%] hidden md:flex flex-row justify-center ">
                   <img src={p.image} alt="img" className="w-7 h-7" />
                 </td>
 
-                <Link to={`/product/${p._id}`} className="w-[17%] hover:text-blue-800 hover:underline flex flex-row justify-center px-4">{p.name.length > 17 ? `${p.name.substring(0, 17)}...` : `${p.name}`}</Link>
-                <td className="w-[17%] flex flex-row justify-center px-4">{p.categoryName}</td>
-                <td className="w-[9%] flex flex-row justify-center px-4">{p.rating}</td>
-                <td className="w-[9%] flex flex-row justify-center px-4">{p.inStock}</td>
-                <td className="w-[9%] flex flex-row justify-center px-4">{p.unitsSold}</td>
-                <td className="w-[9%] flex flex-row justify-center px-4">Rs. {p.price}</td>
-                <td className="w-[9%] flex flex-row justify-center px-4">{p.discountPercent}%</td>
+                <Link to={`/product/${p._id}`} className="w-[35%] sm:w-[25%] md:w-[17%] hover:text-blue-800 hover:underline flex flex-row justify-center px-4">{p.name.length > 13 ? `${p.name.substring(0, 13)}...` : `${p.name}`}</Link>
+                <td className="w-[17%] hidden md:flex flex-row justify-center px-4">{p.categoryName}</td>
+                <td className="lg:w-[7%] w-[10%] hidden sm:flex flex-row justify-center px-4">{p.rating}</td>
+                <td className="lg:w-[7%] md:w-[10%] w-[13%] hidden sm:flex flex-row justify-center px-4">{p.inStock}</td>
+                <td className="lg:w-[7%] w-[10%] hidden sm:flex flex-row justify-center px-4">{p.unitsSold}</td>
+                <td className="md:w-[15%] sm:w-[20%] w-[30%] flex flex-row justify-center px-4">Rs. {p.price}</td>
+                <td className="w-[9%] hidden lg:flex flex-row justify-center px-4">{p.discountPercent}%</td>
 
-                <td className="w-[9%] flex flex-row gap-2 justify-center px-4">
+                <td className="w-[29%] sm:w-[19%] md:w-[9%] flex flex-row gap-2 justify-center px-4">
                   <lord-icon
                     class="cursor-pointer"
                     onClick={() => handleEdit(p)}

@@ -91,8 +91,8 @@ const Checkout = () => {
 
     return (
         <>
-            <main className="flex flex-row w-full -mt-[1rem]">
-                <section className="flex flex-col gap-[3rem] w-[60%] bg-white h-screen p-[3rem]">
+            <main className="flex md:flex-row flex-col w-full -mt-[1rem]">
+                <section className="flex flex-col gap-[3rem] w-full md:w-[50%] lg:w-[60%] bg-white h-screen p-[3rem]">
                     <div className="flex flex-col gap-3">
                         <h1 className="text-2xl font-semibold">Contact</h1>
                         <input type="email" placeholder="Email Address" className="px-4 py-3 border-[1px] border-neutral-300 rounded-md placeholder:text-neutral-500 text-sm" />
@@ -136,7 +136,7 @@ const Checkout = () => {
                     </div>
                 </section>
 
-                <section className="flex flex-col bg-[#eaeaea] h-screen w-[40%] gap-[3rem] p-[3rem]">
+                <section className="flex flex-col bg-[#eaeaea] h-screen w-full md:w-[50%] lg:w-[40%] gap-[3rem] p-[3rem]">
                     <div className="flex flex-row items-end justify-between gap-3">
                         <div className="flex flex-row justify-start gap-3">
                             <img src="https://www.vsurfaces.com/cdn/shop/files/modern-cloud-couch-with-soft-boucle-upholstered-7-seaters-comfy-couch-for-living-room-home-office-648907.jpg?v=1714469587&width=1800" alt="" className="h-16 w-16" />

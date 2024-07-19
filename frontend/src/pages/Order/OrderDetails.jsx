@@ -57,21 +57,21 @@ const OrderDetails = () => {
 
     return (
         <>
-            <main className="flex flex-row w-full -mt-[1rem]">
-                <section className="flex flex-col gap-[3rem] w-[60%] p-[3rem]">
+            <main className="flex md:flex-row flex-col w-full -mt-[1rem]">
+                <section className="flex flex-col gap-[3rem] w-full lg:w-[60%] p-[3rem] lg:text-base text-sm">
                     <div className="flex flex-col justify-start">
                         <h1 className="text-3xl font-semibold">Order</h1>
                         <span className="text-neutral-500">Confirmed September 10</span>
                     </div>
 
                     <div className="flex flex-col justify-start gap-[2rem] bg-white rounded-lg p-[2rem]">
-                        <div className="flex flex-row items-end justify-between">
-                            <div className="flex flex-col justify-start gap-1">
+                        <div className="flex lg:flex-row flex-col items-start lg:items-end justify-between">
+                            <div className="flex flex-col justify-start gap-1 w-full">
                                 <h1 className="text-2xl font-semibold">Expected September 17</h1>
                                 <span className="text-neutral-500">Islamabad</span>
                             </div>
 
-                            <span className="text-neutral-500">#{order._id}</span>
+                            <span className="text-neutral-500 lg:text-base text-sm">#{order._id}</span>
                         </div>
 
                         <div className="flex flex-col gap-4">
@@ -135,48 +135,48 @@ const OrderDetails = () => {
                     </div>
 
                     <div className="flex flex-col justify-start gap-[2rem] bg-white rounded-lg p-[2rem]">
-                        <h1 className="text-2xl font-semibold">Shipping Details</h1>
+                        <h1 className="text-xl lg:text-2xl font-semibold">Shipping Details</h1>
 
-                        <div className="flex flex-row w-full gap-[10rem]">
+                        <div className="flex sm:flex-row flex-col w-full gap-[1rem] items-start sm:justify-between">
                             <div className="flex flex-col justify-between gap-[1rem]">
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">Name</label>
-                                    <p className="text-lg">Ali Asif</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">Name</label>
+                                    <p className="text-sm md:text-md lg:text-lg">Ali Asif</p>
                                 </div>
 
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">Email Address</label>
-                                    <p className="text-lg">aliasif1171@gmail.com</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">Email Address</label>
+                                    <p className="text-sm md:text-md lg:text-lg">aliasif1171@gmail.com</p>
                                 </div>
 
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">Payment Method</label>
-                                    <p className="text-lg">Bank Transfer</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">Payment Method</label>
+                                    <p className="text-sm md:text-md lg:text-lg">Bank Transfer</p>
                                 </div>
                             </div>
 
                             <div className="flex flex-col justify-between gap-[1rem]">
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">City</label>
-                                    <p className="text-lg">Islamabad</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">City</label>
+                                    <p className="text-sm md:text-md lg:text-lg">Islamabad</p>
                                 </div>
 
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">Postal Code</label>
-                                    <p className="text-lg">44000</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">Postal Code</label>
+                                    <p className="text-sm md:text-md lg:text-lg">44000</p>
                                 </div>
 
                                 <div className="flex flex-col justify-start text-start items-start">
-                                    <label htmlFor="name" className="text-neutral-500 text-md">Delivery Address</label>
-                                    <p className="text-lg">G-13/1, Street 79, House 16</p>
+                                    <label htmlFor="name" className="text-neutral-500 text-xs md:text-sm lg:text-md">Delivery Address</label>
+                                    <p className="text-sm md:text-md lg:text-lg">G-13/1, Street 79, House 16</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section className="flex flex-col bg-[#ffffff] h-screen w-[40%] gap-[3rem] p-[3rem]">
-                    <div className="flex flex-row items-end justify-between gap-3">
+                <section className="flex flex-col bg-[#ffffff] h-screen w-full lg:w-[40%] gap-[3rem] py-[3rem] px-[1rem] lg:p-[3rem] lg:text-base text-sm">
+                    <div className="flex lg:flex-row flex-col items-start lg:items-end justify-between gap-3">
                         <div className="flex flex-row justify-start gap-3">
                             <img src="https://www.vsurfaces.com/cdn/shop/files/modern-cloud-couch-with-soft-boucle-upholstered-7-seaters-comfy-couch-for-living-room-home-office-648907.jpg?v=1714469587&width=1800" alt="" className="h-16 w-16" />
 
@@ -191,22 +191,22 @@ const OrderDetails = () => {
 
                     <span className="h-[1px] -mt-[1rem] w-full bg-neutral-400"></span>
 
-                    <Link to='/shop' className="flex flex-row justify-center bg-black text-white border-[2px] border-black hover:bg-white hover:text-black font-semibold px-4 py-2 -mt-[2rem] transition duration-200">Shop More</Link>
+                    <Link to='/shop' className="text-sm lg:text-base flex flex-row justify-center bg-black text-white border-[2px] border-black hover:bg-white hover:text-black font-semibold px-4 py-2 -mt-[2rem] transition duration-200">Shop More</Link>
 
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row justify-between">
-                            <span className="font-normal text-sm">Subtotal</span>
-                            <span className="font-normal text-sm">Rs. 15,000</span>
+                            <span className="font-normal text-xs lg:text-sm">Subtotal</span>
+                            <span className="font-normal text-xs lg:text-sm">Rs. 15,000</span>
                         </div>
 
                         <div className="flex flex-row justify-between">
-                            <span className="font-normal text-sm">Shipping</span>
-                            <span className="font-normal text-sm">Rs. 150</span>
+                            <span className="font-normal text-xs lg:text-sm">Shipping</span>
+                            <span className="font-normal text-xs lg:text-sm">Rs. 150</span>
                         </div>
 
                         <div className="flex flex-row justify-between">
-                            <span className="text-xl font-semibold">Total</span>
-                            <span className="text-xl font-semibold">Rs. 15,150</span>
+                            <span className="text-md lg:text-xl font-semibold">Total</span>
+                            <span className="text-md lg:text-xl font-semibold">Rs. 15,150</span>
                         </div>
                     </div>
                 </section>

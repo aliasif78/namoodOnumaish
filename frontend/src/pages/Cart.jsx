@@ -89,7 +89,7 @@ const Cart = () => {
             <div className="h-screen bg-white">
                 <div className="flex flex-col justify-center items-center text-center w-full h-fit gap-[1rem] bg-[#f3f3f3] py-[2rem] -mt-[1rem]">
                     <h1 className="text-4xl font-semibold">Cart</h1>
-                    <p className="text-sm w-[50%]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos rerum, omnis soluta aut temporibus repellendus reiciendis. Sed culpa dignissimos alias!</p>
+                    <p className="text-sm w-[80%] md:w-[50%]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos rerum, omnis soluta aut temporibus repellendus reiciendis. Sed culpa dignissimos alias!</p>
 
                     <div className="flex flex-row gap-3 mt-[1rem]">
                         <Link to='/' className="text-[#576353] underline">Home</Link>
@@ -98,38 +98,48 @@ const Cart = () => {
                     </div>
                 </div>
 
-                <div className="px-[3rem] mt-[3rem]">
+                <div className="px-[1rem] sm:px-[3rem] mt-[3rem]">
                     <table className="border-[1px] border-[#dee2e6] bg-white text-black w-full shadow-xl">
-                        <tr className="flex flex-row justify-between px-[2rem] py-[0.5rem] border-b-2 border-[#dee2e6]">
-                            <th className="font-medium w-[10%]"></th>
-                            <th className="font-medium w-[20%]">Product</th>
-                            <th className="font-medium w-[20%]">Price</th>
-                            <th className="font-medium w-[20%]">Quantity</th>
-                            <th className="font-medium w-[20%]">Total</th>
+                        <tr className="flex flex-row justify-between px-[1rem] sm:px-[2rem] py-[0.5rem] border-b-2 border-[#dee2e6]">
+                            <th className="font-medium w-[15%] sm:w-[10%]"></th>
+                            <th className="font-medium w-[35%] sm:w-[20%]">Product</th>
+                            <th className="font-medium hidden sm:flex flex-col justify-center sm:w-[20%]">Price</th>
+                            <th className="font-medium w-[20%] sm:w-[20%]">Quantity</th>
+                            <th className="font-medium w-[25%]">Total</th>
                             <th className="font-medium w-[10%]"></th>
                         </tr>
 
-                        <tr className="font-medium flex flex-row px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
-                            <td className="w-[10%]"><img src="https://cdn.shopify.com/s/files/1/0585/9786/7676/files/modern-cloud-couch-with-soft-boucle-upholstered-3-seaters-comfy-couch-for-living-room-home-office-912289_128x128.jpg?v=1717153174" alt="img" className="size-[4rem]" /></td>
+                        <tr className="font-medium flex flex-row px-1 sm:px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
+                            <td className="w-[15%] sm:w-[10%]"><img src="https://cdn.shopify.com/s/files/1/0585/9786/7676/files/modern-cloud-couch-with-soft-boucle-upholstered-3-seaters-comfy-couch-for-living-room-home-office-912289_128x128.jpg?v=1717153174" alt="img" className="size-[4rem]" /></td>
 
-                            <td className="flex flex-row justify-center pb-4 items-center text-sm w-[20%]">Trendy Cloth</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">$ 90.00</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">2</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">$ 180.00</td>
+                            <td className="flex flex-row justify-center pb-4 items-center text-sm w-[35%] sm:w-[20%]">
+                                <div className="flex flex-col items-start gap-1">
+                                    <span>Trendy Cloth</span>
+                                    <span className="text-xs sm:hidden text-neutral-500">$ 90.00</span>
+                                </div>
+                            </td>
+                            <td className="hidden sm:flex flex-row justify-center pb-4 items-center w-[15%] sm:w-[20%] font-normal text-neutral-500">$ 90.00</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] sm:w-[20%] font-normal text-neutral-500">2</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[25%] font-normal text-neutral-500">$ 180.00</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">x</td>
                         </tr>
 
-                        <tr className="font-medium flex flex-row px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
-                            <td className="w-[10%]"><img src="data:image/jpeg;base64,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" alt="img" className="size-[4rem]" /></td>
+                        <tr className="font-medium flex flex-row px-1 sm:px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
+                            <td className="w-[15%] sm:w-[10%]"><img src="data:image/jpeg;base64,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" alt="img" className="size-[4rem]" /></td>
 
-                            <td className="flex flex-row justify-center pb-4 items-center text-sm w-[20%]">Sunglasses</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">$ 45.00</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">1</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] font-normal text-neutral-500">$ 45.00</td>
+                            <td className="flex flex-row justify-center pb-4 items-center text-sm w-[35%] sm:w-[20%]">
+                                <div className="flex flex-col items-start gap-1">
+                                    <span>Sunglasses</span>
+                                    <span className="text-xs sm:hidden text-neutral-500">$ 45.00</span>
+                                </div>
+                            </td>
+                            <td className="hidden sm:flex flex-row justify-center pb-4 items-center w-[15%] sm:w-[20%] font-normal text-neutral-500">$ 45.00</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[20%] sm:w-[20%] font-normal text-neutral-500">1</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[25%] font-normal text-neutral-500">$ 45.00</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">x</td>
                         </tr>
 
-                        <tr className="flex flex-row justify-between items-center px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
+                        <tr className="flex flex-col sm:flex-row items-end gap-[1rem] sm:gap-0 sm:justify-between sm:items-center px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
                             <div className="flex flex-row gap-2">
                                 <span className="font-semibold">Grand Total: </span>
                                 <span className="text-nuetral-500">$ 225.00</span>
@@ -139,7 +149,7 @@ const Cart = () => {
                         </tr>
                     </table>
                 </div>
-            </div>      
+            </div>
 
             {/* <div className="flex flex-col justify-between items-center gap-3 mt-[3rem]">
                 {cart.cartItems.map(i => (

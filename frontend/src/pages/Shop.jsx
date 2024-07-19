@@ -2,8 +2,8 @@
 const Shop = () => {
     return (
         <>
-            <div className="flex flex-row w-full p-[3rem] justify-between">
-                <section className="bg-white flex flex-col gap-[1.5rem] text-black p-[1rem] h-fit w-[20%]">
+            <div className="flex flex-row w-full p-[1rem] sm:p-[3rem] justify-center gap-[2rem]">
+                <section className="bg-white sticky top-[5.25rem] sm:top-[7.5rem] lg:top-[8rem] left-0 flex flex-col gap-[1.5rem] text-black p-[1rem] h-fit w-[40%] lg:w-[20%]">
                     <div className="flex flex-col gap-1">
                         <h3 className="font-light mb-1">Category</h3>
 
@@ -26,7 +26,8 @@ const Shop = () => {
                     <span className="bg-neutral-300 h-[1px] w-full"></span>
 
                     <div className="flex flex-col gap-2">
-                        <h3 className="font-light">Price Range</h3>
+                        <h3 className="font-light hidden sm:block">Price Range</h3>
+                        <h3 className="font-light sm:hidden">Price</h3>
 
                         <div className="flex flex-row gap-2 text-sm items-center w-full">
                             <div className="flex flex-col gap-1 w-[45%]">
@@ -50,7 +51,7 @@ const Shop = () => {
                 </section>
 
                 <section>
-                    <div class="grid grid-cols-4 gap-[1rem]">
+                    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-[1rem]">
                         <div className="card flex flex-col justify-center text-center w-fit h-fit">
                             <img src="https://www.vsurfaces.com/cdn/shop/files/autumn-spice-465269.jpg?v=1717152558&width=360" alt="img" className='w-[13rem] h-[18rem] transition-transform duration-300 ease-in-out transform hover:scale-105' />
 
