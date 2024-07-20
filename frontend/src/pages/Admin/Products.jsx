@@ -83,9 +83,9 @@ const Products = () => {
     if (!editableProductId)
       toast.info("Adding product, please wait...")
     else
-    toast.info("Updating product, please wait...")
-  
-  // Get Firebase download URL for the image
+      toast.info("Updating product, please wait...")
+
+    // Get Firebase download URL for the image
     const storage = getStorage();
     const storageRef = ref(storage, image)
 
@@ -390,10 +390,9 @@ const Products = () => {
 
         {isAddOrUpdate && (
           <>
-            <div className="overlay flex w-full h-full -mt-[2rem] absolute bg-black opacity-70">
-            </div>
+            <div className="overlay flex w-full h-full -mt-[2rem] absolute bg-black opacity-70"></div>
 
-            <div className="overlay flex flex-col gap-4 w-[30%] h-[65%] -mt-[5rem] absolute bg-white opacity-[100%]">
+            <div className="overlay flex flex-col gap-4 w-[70%] md:w-[60%] lg:w-[30%] h-[65%] -mt-[5rem] absolute bg-white opacity-[100%]">
               <div className="flex flex-col items-end mb-[1rem]">
                 <button className="bg-red-700 hover:bg-red-900 text-white px-2 pb-1" onClick={handleExitEdit}>x</button>
               </div>
@@ -401,16 +400,18 @@ const Products = () => {
               <span className="justify-center text-center font-semibold text-neutral-700 text-2xl -mt-[1.5rem]">{editableProductId ? "Update Product" : "Add Product"}</span>
 
               <div className="flex flex-row justify-center w-full px-5 gap-3">
-                <input type="text" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
-                <input type="number" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} />
+                <input type="text" className="bg-white w-[50%] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+                <input type="number" className="bg-white w-[50%] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)} />
               </div>
 
-              <input type="text" className="bg-white border-[1px] border-neutral-400 pl-2 py-1 text-md mx-[1.63rem]" placeholder="Image URL" value={image} onChange={e => setImage(e.target.value)} />
+              <div className="px-5">
+                <input type="text" className="bg-white border-[1px] border-neutral-400 w-[100%] pl-2 py-1 text-md" placeholder="Image URL" value={image} onChange={e => setImage(e.target.value)} />
+              </div>
 
               <div className="flex flex-row justify-center w-full px-5 gap-3">
-                <input type="inStock" className="bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Count in Stock" value={inStock} onChange={e => setInStock(e.target.value)} />
+                <input type="inStock" className="bg-white w-[50%] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Count in Stock" value={inStock} onChange={e => setInStock(e.target.value)} />
 
-                <select name="categories" id="categories" required={true} onChange={handleCategoryChange} className={`bg-white w-[10rem] border-[1px] border-neutral-400 pl-2 py-1 text-md ${category === "x" ? "text-neutral-400" : "text-black"}`}>
+                <select name="categories" id="categories" required={true} onChange={handleCategoryChange} className={`bg-white w-[50%] border-[1px] border-neutral-400 pl-2 py-1 text-md ${category === "x" ? "text-neutral-400" : "text-black"}`}>
                   <option value="">Category</option>
 
                   {allCategories && allCategories.map(c => (
@@ -419,7 +420,9 @@ const Products = () => {
                 </select>
               </div>
 
-              <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="border-[1px] border-neutral-400 mx-[1.63rem] pl-2 py-1"></textarea>
+              <div className="px-5">
+                <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="border-[1px] border-neutral-400 w-[100%] pl-2 py-1"></textarea>
+              </div>
 
               <div className="flex flex-row justify-center">
                 <button onClick={handleSubmit} className="px-4 py-2 bg-blue-900 hover:bg-blue-700 text-white w-fit rounded-xl">Submit</button>

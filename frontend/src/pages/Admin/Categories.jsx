@@ -12,7 +12,7 @@ const Categories = () => {
 
   const [name, setName] = useState('')
   const [editableName, setEditableName] = useState('')
-  const [editableCategoryId, setEditableCategoryId] = useState('')
+  const [editableCategoryId, setEditableCategoryId] = useState('x')
   const [editableCategory, setEditableCategory] = useState('')
 
   const [isAddOrUpdate, setIsAddOrUpdate] = useState(false)
@@ -195,15 +195,15 @@ const Categories = () => {
             <div className="overlay flex w-full h-full -mt-[2rem] absolute bg-black opacity-70">
             </div>
 
-            <div className="overlay flex flex-col gap-4 w-[25%] h-[35%] -mt-[5rem] absolute bg-white opacity-[100%]">
+            <div className="overlay flex flex-col gap-4 w-[50%] lg:w-[25%] h-[35%] -mt-[5rem] absolute bg-white opacity-[100%]">
               <div className="flex flex-col items-end mb-[1rem]">
                 <button className="bg-red-700 hover:bg-red-900 text-white px-2 pb-1" onClick={handleExitEdit}>x</button>
               </div>
 
-              <span className="justify-center text-center font-semibold text-neutral-700 text-2xl -mt-[1.5rem]">{editableCategoryId ? "Update Category" : "Add Category"}</span>
+              <span className="justify-center text-center font-semibold text-neutral-700 text-xl md:text-2xl -mt-[1.5rem]">{editableCategoryId !== 'x' ? "Update Category" : "Add Category"}</span>
 
               <div className="flex flex-row justify-center w-full px-5 gap-3">
-                <input type="text" className="bg-white w-[15rem] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+                <input type="text" className="bg-white w-[90%] border-[1px] border-neutral-400 pl-2 py-1 text-md" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
               </div>
 
               <div className="flex flex-row justify-center">

@@ -33,8 +33,8 @@ const Cart = () => {
     if (!cart)
         return <div>Loading cart...</div>
 
-    if (cart.cartItems.length == 0)
-        return <div>Your cart is empty.</div>
+    // if (cart.cartItems.length == 0)
+    //     return <div>Your cart is empty.</div>
 
     const changeQuantity = (product, action) => {
         const updatedProduct = { ...product }
@@ -71,18 +71,18 @@ const Cart = () => {
         }
     }
 
-    const emptyCart = () => {
-        if (window.confirm("Are you sure that you want to clear your cart?")) {
-            try {
-                dispatch(clearCart())
-            }
+    // const emptyCart = () => {
+    //     if (window.confirm("Are you sure that you want to clear your cart?")) {
+    //         try {
+    //             dispatch(clearCart())
+    //         }
 
-            catch (err) {
-                console.error(err)
-                toast.error("Failed to clear cart.")
-            }
-        }
-    }
+    //         catch (err) {
+    //             console.error(err)
+    //             toast.error("Failed to clear cart.")
+    //         }
+    //     }
+    // }
 
     return (
         <>
@@ -121,7 +121,17 @@ const Cart = () => {
                             <td className="hidden sm:flex flex-row justify-center pb-4 items-center w-[15%] sm:w-[20%] font-normal text-neutral-500">$ 90.00</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[20%] sm:w-[20%] font-normal text-neutral-500">2</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[25%] font-normal text-neutral-500">$ 180.00</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">x</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">
+                                <lord-icon
+                                    class="cursor-pointer"
+                                    // onClick={() => handleDelete(p)}
+                                    src="https://cdn.lordicon.com/skkahier.json"
+                                    trigger="hover"
+                                    stroke="bold"
+                                    colors="primary:#c71f16"
+                                    style={{ width: "25px", height: "25px" }}>
+                                </lord-icon>
+                            </td>
                         </tr>
 
                         <tr className="font-medium flex flex-row px-1 sm:px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
@@ -136,7 +146,17 @@ const Cart = () => {
                             <td className="hidden sm:flex flex-row justify-center pb-4 items-center w-[15%] sm:w-[20%] font-normal text-neutral-500">$ 45.00</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[20%] sm:w-[20%] font-normal text-neutral-500">1</td>
                             <td className="flex flex-row justify-center pb-4 items-center w-[25%] font-normal text-neutral-500">$ 45.00</td>
-                            <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">x</td>
+                            <td className="flex flex-row justify-center pb-4 items-center w-[10%] text-red-600 font-bold">
+                                <lord-icon
+                                    class="cursor-pointer"
+                                    // onClick={() => handleDelete(p)}
+                                    src="https://cdn.lordicon.com/skkahier.json"
+                                    trigger="hover"
+                                    stroke="bold"
+                                    colors="primary:#c71f16"
+                                    style={{ width: "25px", height: "25px" }}>
+                                </lord-icon>
+                            </td>
                         </tr>
 
                         <tr className="flex flex-col sm:flex-row items-end gap-[1rem] sm:gap-0 sm:justify-between sm:items-center px-[2rem] py-[1rem] border-b-[1px] border-neutral-300">
